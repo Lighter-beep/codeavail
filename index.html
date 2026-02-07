@@ -7,89 +7,149 @@
     <meta name="google-site-verification" content="r42tU2KUmT1Dxhfnc2ldDGKtgdbcF7K51VfeMNsJb8U" />
     
     <style>
-        :root { --primary: #58a6ff; --bg: #0d1117; --card-bg: #161b22; --border: #30363d; --text: #c9d1d9; }
-        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background: var(--bg); color: var(--text); margin: 0; padding: 20px; }
-        .container { max-width: 1000px; margin: auto; }
+        : root { 
+            --primary: #58a6ff; 
+            --accent: #bc8cff;
+            --bg: #0d1117; 
+            --card-bg: #161b22; 
+            --border: #30363d; 
+            --text: #c9d1d9; 
+            --gradient: linear-gradient(90deg, #58a6ff, #bc8cff);
+        }
         
-        header { text-align: center; padding: 40px 0; }
-        h1 { color: var(--primary); font-size: 2.5rem; margin-bottom: 10px; }
+        body { font-family: 'Inter', -apple-system, sans-serif; background: var(--bg); color: var(--text); margin: 0; padding: 20px; }
+        .container { max-width: 900px; margin: auto; }
+        
+        /* NEW COOL HEADING */
+        header { 
+            text-align: center; 
+            padding: 60px 0 40px 0;
+            background: radial-gradient(circle at center, rgba(88, 166, 255, 0.1) 0%, transparent 70%);
+        }
+        h1 { 
+            font-size: 3.5rem; 
+            margin: 0; 
+            background: var(--gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            letter-spacing: -2px;
+            font-weight: 800;
+        }
+        header p { font-size: 1.1rem; color: #8b949e; margin-top: 10px; }
 
         /* Navigation Filter */
-        .filter-nav { display: flex; justify-content: center; gap: 10px; margin-bottom: 30px; flex-wrap: wrap; }
-        .filter-btn { background: var(--card-bg); border: 1px solid var(--border); color: var(--text); padding: 10px 20px; border-radius: 5px; cursor: pointer; transition: 0.3s; font-weight: bold; }
-        .filter-btn:hover, .filter-btn.active { background: var(--primary); color: white; border-color: var(--primary); }
+        .filter-nav { display: flex; justify-content: center; gap: 12px; margin-bottom: 30px; }
+        .filter-btn { 
+            background: transparent; 
+            border: 1px solid var(--border); 
+            color: var(--text); 
+            padding: 8px 24px; 
+            border-radius: 20px; 
+            cursor: pointer; 
+            transition: 0.3s;
+        }
+        .filter-btn:hover, .filter-btn.active { 
+            border-color: var(--primary); 
+            color: var(--primary);
+            background: rgba(88, 166, 255, 0.1);
+        }
 
         /* Search Bar */
-        .search-container { position: relative; margin-bottom: 40px; }
-        #searchBar { width: 100%; padding: 15px; border-radius: 8px; border: 1px solid var(--border); background: var(--card-bg); color: white; font-size: 1rem; outline: none; transition: 0.3s; }
-        #searchBar:focus { border-color: var(--primary); box-shadow: 0 0 10px rgba(88, 166, 255, 0.2); }
+        #searchBar { 
+            width: 100%; 
+            padding: 16px; 
+            border-radius: 12px; 
+            border: 1px solid var(--border); 
+            background: var(--card-bg); 
+            color: white; 
+            font-size: 1rem; 
+            margin-bottom: 40px;
+            box-sizing: border-box;
+        }
 
-        /* Snippet Cards */
-        .snippet-grid { display: grid; grid-template-columns: 1fr; gap: 20px; }
-        .card { background: var(--card-bg); border: 1px solid var(--border); border-radius: 12px; padding: 25px; transition: transform 0.2s; display: block; }
-        .card:hover { transform: translateY(-5px); border-color: var(--primary); }
-        .tag { display: inline-block; background: #238636; color: white; padding: 4px 12px; border-radius: 15px; font-size: 0.75rem; margin-bottom: 15px; }
-        .tag.js { background: #e3b341; color: black; }
-        .tag.css { background: #218bff; }
+        /* Cards */
+        .card { 
+            background: var(--card-bg); 
+            border: 1px solid var(--border); 
+            border-radius: 12px; 
+            padding: 24px; 
+            margin-bottom: 20px; 
+            transition: 0.2s;
+        }
+        .card:hover { border-color: #8b949e; transform: scale(1.01); }
+        .tag { font-size: 0.7rem; font-weight: bold; text-transform: uppercase; color: var(--primary); border: 1px solid var(--primary); padding: 2px 8px; border-radius: 4px; margin-bottom: 10px; display: inline-block; }
         
         pre { background: #010409; padding: 15px; border-radius: 8px; overflow-x: auto; border: 1px solid var(--border); }
         code { color: #d2a8ff; font-family: 'Fira Code', monospace; }
         
-        .copy-btn { float: right; background: #21262d; border: 1px solid var(--border); color: var(--text); padding: 5px 10px; border-radius: 5px; cursor: pointer; }
-        .copy-btn:hover { background: #30363d; }
+        .copy-btn { float: right; background: #21262d; border: 1px solid var(--border); color: #8b949e; padding: 4px 10px; border-radius: 6px; cursor: pointer; font-size: 0.8rem; }
     </style>
 </head>
 <body>
 
 <div class="container">
     <header>
-        <h1>{ CodeAvail }</h1>
-        <p>The cleanest code library for developers.</p>
+        <h1>CodeAvail</h1>
+        <p>The Developer's Secret Toolbox</p>
     </header>
 
     <div class="filter-nav">
-        <button class="filter-btn active" onclick="filterCategory('all')">All Snippets</button>
+        <button class="filter-btn active" onclick="filterCategory('all')">All</button>
         <button class="filter-btn" onclick="filterCategory('Python')">Python</button>
         <button class="filter-btn" onclick="filterCategory('JavaScript')">JavaScript</button>
-        <button class="filter-btn" onclick="filterCategory('HTML/CSS')">HTML/CSS</button>
+        <button class="filter-btn" onclick="filterCategory('Web')">HTML/CSS</button>
     </div>
 
-    <div class="search-container">
-        <input type="text" id="searchBar" placeholder="Search within selected category..." onkeyup="runSearch()">
-    </div>
+    <input type="text" id="searchBar" placeholder="Search for code..." onkeyup="runSearch()">
 
-    <div id="snippetList" class="snippet-grid">
+    <div id="snippetList">
         
         <div class="card" data-category="Python">
             <span class="tag">Python</span>
             <button class="copy-btn" onclick="copyCode(this)">Copy</button>
-            <h3>Reverse a String</h3>
-            <p>Simple one-liner to reverse any string.</p>
-            <pre><code>string[::-1]</code></pre>
+            <h3>1. List Comprehension</h3>
+            <p>Create a list of squares in one line.</p>
+            <pre><code>squares = [x**2 for x in range(10)]</code></pre>
         </div>
 
         <div class="card" data-category="Python">
             <span class="tag">Python</span>
             <button class="copy-btn" onclick="copyCode(this)">Copy</button>
-            <h3>Get List Length</h3>
-            <p>Count how many items are in a list.</p>
-            <pre><code>len(my_list)</code></pre>
+            <h3>2. Dictionary Merge</h3>
+            <p>Merge two dictionaries quickly (Python 3.9+).</p>
+            <pre><code>merged = dict1 | dict2</code></pre>
+        </div>
+
+        <div class="card" data-category="Python">
+            <span class="tag">Python</span>
+            <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+            <h3>3. Flatten a List</h3>
+            <p>Convert a nested list into a single flat list.</p>
+            <pre><code>flat = [item for sublist in nested for item in sublist]</code></pre>
+        </div>
+
+        <div class="card" data-category="Python">
+            <span class="tag">Python</span>
+            <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+            <h3>4. Unique Items</h3>
+            <p>Remove all duplicates from a list.</p>
+            <pre><code>unique = list(set(my_list))</code></pre>
+        </div>
+
+        <div class="card" data-category="Python">
+            <span class="tag">Python</span>
+            <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+            <h3>5. Simple HTTP Server</h3>
+            <p>Run a local server in the current folder via terminal.</p>
+            <pre><code>python -m http.server 8000</code></pre>
         </div>
 
         <div class="card" data-category="JavaScript">
-            <span class="tag js">JavaScript</span>
+            <span class="tag">JavaScript</span>
             <button class="copy-btn" onclick="copyCode(this)">Copy</button>
-            <h3>Console Log</h3>
-            <p>Print data to the browser console for debugging.</p>
-            <pre><code>console.log("Hello Shampi!");</code></pre>
-        </div>
-
-        <div class="card" data-category="HTML/CSS">
-            <span class="tag css">HTML/CSS</span>
-            <button class="copy-btn" onclick="copyCode(this)">Copy</button>
-            <h3>Flexbox Center</h3>
-            <p>Center elements inside a container.</p>
-            <pre><code>display: flex; justify-content: center;</code></pre>
+            <h3>Random Number</h3>
+            <p>Generate a random number between 1 and 100.</p>
+            <pre><code>Math.floor(Math.random() * 100) + 1;</code></pre>
         </div>
 
     </div>
@@ -98,47 +158,30 @@
 <script>
     let currentCategory = 'all';
 
-    function filterCategory(category) {
-        currentCategory = category;
-        
-        // Update Buttons UI
+    function filterCategory(cat) {
+        currentCategory = cat;
         document.querySelectorAll('.filter-btn').forEach(btn => {
-            btn.classList.remove('active');
-            if(btn.innerText === category || (category === 'all' && btn.innerText === 'All Snippets')) {
-                btn.classList.add('active');
-            }
+            btn.classList.toggle('active', btn.innerText === cat || (cat === 'all' && btn.innerText === 'All'));
         });
-
-        runSearch(); // Refresh list
+        runSearch();
     }
 
     function runSearch() {
-        let searchValue = document.getElementById('searchBar').value.toLowerCase();
-        let cards = document.querySelectorAll('.card');
-
-        cards.forEach(card => {
-            let category = card.getAttribute('data-category');
+        let search = document.getElementById('searchBar').value.toLowerCase();
+        document.querySelectorAll('.card').forEach(card => {
+            let cat = card.getAttribute('data-category');
             let text = card.innerText.toLowerCase();
-            
-            // Match Category AND Match Search Text
-            let matchCategory = (currentCategory === 'all' || category === currentCategory);
-            let matchSearch = text.includes(searchValue);
-
-            if (matchCategory && matchSearch) {
-                card.style.display = "block";
-            } else {
-                card.style.display = "none";
-            }
+            let show = (currentCategory === 'all' || cat.includes(currentCategory)) && text.includes(search);
+            card.style.display = show ? "block" : "none";
         });
     }
 
     function copyCode(btn) {
         let code = btn.nextElementSibling.nextElementSibling.nextElementSibling.innerText;
-        navigator. clipboard.writeText(code);
+        navigator.clipboard.writeText(code);
         btn.innerText = "Copied!";
         setTimeout(() => btn.innerText = "Copy", 2000);
     }
 </script>
-
 </body>
 </html>
