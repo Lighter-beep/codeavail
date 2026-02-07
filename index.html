@@ -21,7 +21,7 @@
 
 <div class="container">
     <header>
-        <h1>{ Shampi's Code Hub }</h1>
+        <h1>{ xcodex Code Hub }</h1>
         <p>A collection of high-value code for 2026.</p>
         <input type="text" id="searchBar" placeholder="Search by language or keyword (e.g. Python, CSS)..." onkeyup="searchCode()">
     </header>
@@ -55,7 +55,7 @@
 
     function copyCode(btn) {
         let code = btn.nextElementSibling.nextElementSibling.innerText;
-        navigator.clipboard.writeText(code);
+        navigator. clipboard.writeText(code);
         btn.innerText = "Copied!";
         setTimeout(() => btn.innerText = "Copy", 2000);
     }
