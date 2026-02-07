@@ -3,46 +3,77 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title> xcodex Snippets</title>
-    <meta name="description" content="A library of useful code snippets for developers.">
-<meta name="keywords" content="coding, python, javascript, snippets, html">
-<meta name="robots" content="index, follow">
-    <meta name="google-site-verification" content="r4ZtUZKUmTlDxhfne2ldD6KtgdbeF7K51VfeMNsJb8U" />
+    <title>CodeAvail | Developer Snippet Library</title>
+    <meta name="description" content="Free high-quality code snippets for Python, JavaScript, and CSS.">
+    <meta name="keywords" content="coding, snippets, python, web development, html">
+    <meta name="google-site-verification" content="r42tU2KUmT1Dxhfnc2ldDGKtgdbcF7K51VfeMNsJb8U" />
+    
     <style>
-        body { font-family: 'Inter', sans-serif; background: #0d1117; color: #c9d1d9; padding: 20px; }
+        body { font-family: 'Inter', sans-serif; background: #0d1117; color: #c9d1d9; padding: 20px; line-height: 1.6; }
         .container { max-width: 900px; margin: auto; }
-        header { text-align: center; margin-bottom: 40px; }
-        #searchBar { width: 100%; padding: 15px; border-radius: 8px; border: 1px solid #30363d; background: #161b22; color: white; font-size: 1.1rem; margin-bottom: 30px; }
-        .card { background: #161b22; border: 1px solid #30363d; border-radius: 10px; padding: 20px; margin-bottom: 20px; transition: 0.3s; }
+        header { text-align: center; margin-bottom: 40px; border-bottom: 1px solid #30363d; padding-bottom: 20px; }
+        #searchBar { width: 100%; padding: 15px; border-radius: 8px; border: 1px solid #30363d; background: #161b22; color: white; font-size: 1.1rem; margin-bottom: 30px; box-sizing: border-box; }
+        .card { background: #161b22; border: 1px solid #30363d; border-radius: 10px; padding: 20px; margin-bottom: 20px; position: relative; }
         .card:hover { border-color: #58a6ff; }
-        .tag { background: #238636; color: white; padding: 3px 10px; border-radius: 20px; font-size: 0.8rem; }
-        pre { background: #010409; padding: 15px; border-radius: 6px; overflow-x: auto; border: 1px solid #30363d; }
-        code { color: #79c0ff; }
-        .copy-btn { background: #21262d; color: #c9d1d9; border: 1px solid #30363d; padding: 8px 12px; border-radius: 6px; cursor: pointer; float: right; }
+        .tag { background: #238636; color: white; padding: 3px 10px; border-radius: 20px; font-size: 0.8rem; font-weight: bold; }
+        pre { background: #010409; padding: 15px; border-radius: 6px; overflow-x: auto; border: 1px solid #30363d; margin-top: 15px; }
+        code { color: #79c0ff; font-family: 'Courier New', monospace; }
+        .copy-btn { background: #21262d; color: #c9d1d9; border: 1px solid #30363d; padding: 8px 12px; border-radius: 6px; cursor: pointer; float: right; transition: 0.2s; }
+        .copy-btn:hover { background: #30363d; color: white; }
     </style>
 </head>
 <body>
 
 <div class="container">
     <header>
-        <h1>{ xcodex Code Hub }</h1>
-        <p>A collection of high-value code for 2026.</p>
-        <input type="text" id="searchBar" placeholder="Search by language or keyword (e.g. Python, CSS)..." onkeyup="searchCode()">
+        <h1>{ CodeAvail }</h1>
+        <p>Premium code snippets for the modern developer.</p>
+        <input type="text" id="searchBar" placeholder="Search snippets (e.g. Python, CSS, Mobile)..." onkeyup="searchCode()">
     </header>
 
     <div id="snippetList">
-        <div class="card" data-lang="python">
+        <div class="card">
             <span class="tag">Python</span>
             <button class="copy-btn" onclick="copyCode(this)">Copy</button>
-            <h3>Reverse a String</h3>
-            <pre><code>def reverse_str(s): return s[::-1]</code></pre>
+            <h3>Quick String Reversal</h3>
+            <p>The fastest way to reverse a string in Python is using slicing.</p>
+            <pre><code>text = "Hello World"[::-1]
+print(text)</code></pre>
         </div>
 
-        <div class="card" data-lang="javascript">
+        <div class="card">
             <span class="tag">JavaScript</span>
             <button class="copy-btn" onclick="copyCode(this)">Copy</button>
             <h3>Get Current Year</h3>
-            <pre><code>const year = new Date().getFullYear();</code></pre>
+            <p>Automatically update the copyright year on your website.</p>
+            <pre><code>document.write(new Date().getFullYear());</code></pre>
+        </div>
+
+        <div class="card">
+            <span class="tag">CSS</span>
+            <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+            <h3>Center a Div (The Modern Way)</h3>
+            <p>Use Flexbox to center any element perfectly in the middle.</p>
+            <pre><code>.container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}</code></pre>
+        </div>
+
+        <div class="card">
+            <span class="tag">HTML</span>
+            <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+            <h3>Responsive Navigation Shell</h3>
+            <p>A basic structure for a mobile-friendly menu.</p>
+            <pre><code>&lt;nav&gt;
+  &lt;ul&gt;
+    &lt;li&gt;Home&lt;/li&gt;
+    &lt;li&gt;Projects&lt;/li&gt;
+    &lt;li&gt;Contact&lt;/li&gt;
+  &lt;/ul&gt;
+&lt;/nav&gt;</code></pre>
         </div>
     </div>
 </div>
@@ -58,7 +89,7 @@
     }
 
     function copyCode(btn) {
-        let code = btn.nextElementSibling.nextElementSibling.innerText;
+        let code = btn.nextElementSibling.nextElementSibling.nextElementSibling.innerText;
         navigator. clipboard.writeText(code);
         btn.innerText = "Copied!";
         setTimeout(() => btn.innerText = "Copy", 2000);
