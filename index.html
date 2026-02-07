@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Shampi's Snippets</title>
+    <style>
+        body { font-family: 'Inter', sans-serif; background: #0d1117; color: #c9d1d9; padding: 20px; }
+        .container { max-width: 900px; margin: auto; }
+        header { text-align: center; margin-bottom: 40px; }
+        #searchBar { width: 100%; padding: 15px; border-radius: 8px; border: 1px solid #30363d; background: #161b22; color: white; font-size: 1.1rem; margin-bottom: 30px; }
+        .card { background: #161b22; border: 1px solid #30363d; border-radius: 10px; padding: 20px; margin-bottom: 20px; transition: 0.3s; }
+        .card:hover { border-color: #58a6ff; }
+        .tag { background: #238636; color: white; padding: 3px 10px; border-radius: 20px; font-size: 0.8rem; }
+        pre { background: #010409; padding: 15px; border-radius: 6px; overflow-x: auto; border: 1px solid #30363d; }
+        code { color: #79c0ff; }
+        .copy-btn { background: #21262d; color: #c9d1d9; border: 1px solid #30363d; padding: 8px 12px; border-radius: 6px; cursor: pointer; float: right; }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <header>
+        <h1>{ Shampi's Code Hub }</h1>
+        <p>A collection of high-value code for 2026.</p>
+        <input type="text" id="searchBar" placeholder="Search by language or keyword (e.g. Python, CSS)..." onkeyup="searchCode()">
+    </header>
+
+    <div id="snippetList">
+        <div class="card" data-lang="python">
+            <span class="tag">Python</span>
+            <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+            <h3>Reverse a String</h3>
+            <pre><code>def reverse_str(s): return s[::-1]</code></pre>
+        </div>
+
+        <div class="card" data-lang="javascript">
+            <span class="tag">JavaScript</span>
+            <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+            <h3>Get Current Year</h3>
+            <pre><code>const year = new Date().getFullYear();</code></pre>
+        </div>
+    </div>
+</div>
+
+<script>
+    function searchCode() {
+        let filter = document.getElementById('searchBar').value.toLowerCase();
+        let cards = document.querySelectorAll('.card');
+        cards.forEach(card => {
+            let text = card.innerText.toLowerCase();
+            card.style.display = text.includes(filter) ? "block" : "none";
+        });
+    }
+
+    function copyCode(btn) {
+        let code = btn.nextElementSibling.nextElementSibling.innerText;
+        navigator.clipboard.writeText(code);
+        btn.innerText = "Copied!";
+        setTimeout(() => btn.innerText = "Copy", 2000);
+    }
+</script>
+</body>
+</html>
