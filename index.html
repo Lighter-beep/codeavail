@@ -3,86 +3,74 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>CodeAvail | Advanced Snippet Library</title>
+    <title>CodeAvail | Developer Library</title>
     <meta name="google-site-verification" content="r42tU2KUmT1Dxhfnc2ldDGKtgdbcF7K51VfeMNsJb8U" />
     
     <style>
-        : root { 
-            --primary: #58a6ff; 
-            --accent: #bc8cff;
-            --bg: #0d1117; 
-            --card-bg: #161b22; 
-            --border: #30363d; 
-            --text: #c9d1d9; 
-            --gradient: linear-gradient(90deg, #58a6ff, #bc8cff);
+        /* BASE THEME */
+        body { 
+            background-color: #0d1117 !important; /* Force Dark Background */
+            color: #c9d1d9; 
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
+            margin: 0;
+            padding: 0;
         }
-        
-        body { font-family: 'Inter', -apple-system, sans-serif; background: var(--bg); color: var(--text); margin: 0; padding: 20px; }
-        .container { max-width: 900px; margin: auto; }
-        
-        /* NEW COOL HEADING */
-        header { 
-            text-align: center; 
-            padding: 60px 0 40px 0;
-            background: radial-gradient(circle at center, rgba(88, 166, 255, 0.1) 0%, transparent 70%);
-        }
+
+        .container { max-width: 800px; margin: 0 auto; padding: 40px 20px; }
+
+        /* COOL HEADER */
+        header { text-align: center; padding-bottom: 40px; }
         h1 { 
-            font-size: 3.5rem; 
+            font-size: 3rem; 
             margin: 0; 
-            background: var(--gradient);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            letter-spacing: -2px;
-            font-weight: 800;
+            color: #58a6ff;
+            letter-spacing: -1px;
         }
-        header p { font-size: 1.1rem; color: #8b949e; margin-top: 10px; }
+        .subtitle { color: #8b949e; font-size: 1.1rem; margin-top: 5px; }
 
-        /* Navigation Filter */
-        .filter-nav { display: flex; justify-content: center; gap: 12px; margin-bottom: 30px; }
-        .filter-btn { 
-            background: transparent; 
-            border: 1px solid var(--border); 
-            color: var(--text); 
-            padding: 8px 24px; 
-            border-radius: 20px; 
-            cursor: pointer; 
-            transition: 0.3s;
+        /* NAVIGATION */
+        .nav-tabs { display: flex; justify-content: center; gap: 10px; margin-bottom: 30px; }
+        .tab-btn { 
+            background: #161b22; 
+            border: 1px solid #30363d; 
+            color: #c9d1d9; 
+            padding: 8px 16px; 
+            border-radius: 6px; 
+            cursor: pointer;
+            font-weight: 600;
         }
-        .filter-btn:hover, .filter-btn.active { 
-            border-color: var(--primary); 
-            color: var(--primary);
-            background: rgba(88, 166, 255, 0.1);
-        }
+        .tab-btn.active { border-color: #58a6ff; color: #58a6ff; background: rgba(88, 166, 255, 0.1); }
 
-        /* Search Bar */
+        /* SEARCH */
         #searchBar { 
             width: 100%; 
-            padding: 16px; 
-            border-radius: 12px; 
-            border: 1px solid var(--border); 
-            background: var(--card-bg); 
+            padding: 12px; 
+            border-radius: 6px; 
+            border: 1px solid #30363d; 
+            background: #010409; 
             color: white; 
-            font-size: 1rem; 
-            margin-bottom: 40px;
+            margin-bottom: 20px;
             box-sizing: border-box;
         }
 
-        /* Cards */
+        /* SNIPPET CARDS */
         .card { 
-            background: var(--card-bg); 
-            border: 1px solid var(--border); 
-            border-radius: 12px; 
-            padding: 24px; 
+            background: #161b22; 
+            border: 1px solid #30363d; 
+            border-radius: 8px; 
+            padding: 20px; 
             margin-bottom: 20px; 
-            transition: 0.2s;
         }
-        .card:hover { border-color: #8b949e; transform: scale(1.01); }
-        .tag { font-size: 0.7rem; font-weight: bold; text-transform: uppercase; color: var(--primary); border: 1px solid var(--primary); padding: 2px 8px; border-radius: 4px; margin-bottom: 10px; display: inline-block; }
+        .tag { font-size: 0.7rem; color: #58a6ff; border: 1px solid #58a6ff; padding: 2px 6px; border-radius: 3px; margin-bottom: 10px; display: inline-block; text-transform: uppercase; }
         
-        pre { background: #010409; padding: 15px; border-radius: 8px; overflow-x: auto; border: 1px solid var(--border); }
-        code { color: #d2a8ff; font-family: 'Fira Code', monospace; }
+        pre { background: #010409; padding: 15px; border-radius: 6px; overflow-x: auto; border: 1px solid #30363d; position: relative; }
+        code { color: #d2a8ff; font-family: "SFMono-Regular", Consolas, "Liberation Mono", Menlo, monospace; }
         
-        .copy-btn { float: right; background: #21262d; border: 1px solid var(--border); color: #8b949e; padding: 4px 10px; border-radius: 6px; cursor: pointer; font-size: 0.8rem; }
+        .copy-btn { 
+            position: absolute; right: 10px; top: 10px;
+            background: #21262d; border: 1px solid #30363d; color: #8b949e; 
+            padding: 4px 8px; border-radius: 4px; cursor: pointer; font-size: 0.7rem;
+        }
     </style>
 </head>
 <body>
@@ -90,94 +78,62 @@
 <div class="container">
     <header>
         <h1>CodeAvail</h1>
-        <p>The Developer's Secret Toolbox</p>
+        <p class="subtitle">Premium Snippets for Developers</p>
     </header>
 
-    <div class="filter-nav">
-        <button class="filter-btn active" onclick="filterCategory('all')">All</button>
-        <button class="filter-btn" onclick="filterCategory('Python')">Python</button>
-        <button class="filter-btn" onclick="filterCategory('JavaScript')">JavaScript</button>
-        <button class="filter-btn" onclick="filterCategory('Web')">HTML/CSS</button>
+    <div class="nav-tabs">
+        <button class="tab-btn active" onclick="filter('all')">All</button>
+        <button class="tab-btn" onclick="filter('Python')">Python</button>
+        <button class="tab-btn" onclick="filter('JavaScript')">JavaScript</button>
+        <button class="tab-btn" onclick="filter('Web')">HTML/CSS</button>
     </div>
 
-    <input type="text" id="searchBar" placeholder="Search for code..." onkeyup="runSearch()">
+    <input type="text" id="searchBar" placeholder="Search code..." onkeyup="runSearch()">
 
     <div id="snippetList">
-        
-        <div class="card" data-category="Python">
+        <div class="card" data-cat="Python">
             <span class="tag">Python</span>
-            <button class="copy-btn" onclick="copyCode(this)">Copy</button>
-            <h3>1. List Comprehension</h3>
-            <p>Create a list of squares in one line.</p>
-            <pre><code>squares = [x**2 for x in range(10)]</code></pre>
+            <pre><button class="copy-btn" onclick="copy(this)">Copy</button><code># List Squares
+squares = [x**2 for x in range(10)]</code></pre>
         </div>
 
-        <div class="card" data-category="Python">
+        <div class="card" data-cat="Python">
             <span class="tag">Python</span>
-            <button class="copy-btn" onclick="copyCode(this)">Copy</button>
-            <h3>2. Dictionary Merge</h3>
-            <p>Merge two dictionaries quickly (Python 3.9+).</p>
-            <pre><code>merged = dict1 | dict2</code></pre>
+            <pre><button class="copy-btn" onclick="copy(this)">Copy</button><code># Merge Dicts
+merged = dict1 | dict2</code></pre>
         </div>
 
-        <div class="card" data-category="Python">
-            <span class="tag">Python</span>
-            <button class="copy-btn" onclick="copyCode(this)">Copy</button>
-            <h3>3. Flatten a List</h3>
-            <p>Convert a nested list into a single flat list.</p>
-            <pre><code>flat = [item for sublist in nested for item in sublist]</code></pre>
-        </div>
-
-        <div class="card" data-category="Python">
-            <span class="tag">Python</span>
-            <button class="copy-btn" onclick="copyCode(this)">Copy</button>
-            <h3>4. Unique Items</h3>
-            <p>Remove all duplicates from a list.</p>
-            <pre><code>unique = list(set(my_list))</code></pre>
-        </div>
-
-        <div class="card" data-category="Python">
-            <span class="tag">Python</span>
-            <button class="copy-btn" onclick="copyCode(this)">Copy</button>
-            <h3>5. Simple HTTP Server</h3>
-            <p>Run a local server in the current folder via terminal.</p>
-            <pre><code>python -m http.server 8000</code></pre>
-        </div>
-
-        <div class="card" data-category="JavaScript">
+        <div class="card" data-cat="JavaScript">
             <span class="tag">JavaScript</span>
-            <button class="copy-btn" onclick="copyCode(this)">Copy</button>
-            <h3>Random Number</h3>
-            <p>Generate a random number between 1 and 100.</p>
-            <pre><code>Math.floor(Math.random() * 100) + 1;</code></pre>
+            <pre><button class="copy-btn" onclick="copy(this)">Copy</button><code>// Random Number
+Math.floor(Math.random() * 100);</code></pre>
         </div>
-
     </div>
 </div>
 
 <script>
-    let currentCategory = 'all';
+    let activeCat = 'all';
 
-    function filterCategory(cat) {
-        currentCategory = cat;
-        document.querySelectorAll('.filter-btn').forEach(btn => {
+    function filter(cat) {
+        activeCat = cat;
+        document.querySelectorAll('.tab-btn').forEach(btn => {
             btn.classList.toggle('active', btn.innerText === cat || (cat === 'all' && btn.innerText === 'All'));
         });
         runSearch();
     }
 
     function runSearch() {
-        let search = document.getElementById('searchBar').value.toLowerCase();
+        let term = document.getElementById('searchBar').value.toLowerCase();
         document.querySelectorAll('.card').forEach(card => {
-            let cat = card.getAttribute('data-category');
+            let cat = card.getAttribute('data-cat');
             let text = card.innerText.toLowerCase();
-            let show = (currentCategory === 'all' || cat.includes(currentCategory)) && text.includes(search);
+            let show = (activeCat === 'all' || cat === activeCat) && text.includes(term);
             card.style.display = show ? "block" : "none";
         });
     }
 
-    function copyCode(btn) {
-        let code = btn.nextElementSibling.nextElementSibling.nextElementSibling.innerText;
+    function copy(btn) {
+        let code = btn.nextElementSibling.innerText;
         navigator.clipboard.writeText(code);
         btn.innerText = "Copied!";
         setTimeout(() => btn.innerText = "Copy", 2000);
