@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
+<head></head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>CodeAvail | Developer Library</title>
@@ -8,32 +8,36 @@
     
     <style>
         /* CORE THEME */
-        body { background-color: #0d1117; color: #c9d1d9; font-family: -apple-system, sans-serif; margin: 0; padding: 0; }
-        .container { max-width: 800px; margin: 0 auto; padding: 40px 20px; }
+        body { background-color: #0d1117; color: #c9d1d9; font-family: -apple-system, sans-serif; margin: 0; padding: 0; scroll-behavior: smooth; }
+        .container { max-width: 900px; margin: 0 auto; padding: 40px 20px; }
         
         /* HEADER */
         header { text-align: center; padding-bottom: 40px; }
-        h1 { font-size: 3rem; margin: 0; color: #58a6ff; letter-spacing: -1px; }
+        h1 { font-size: 3.5rem; margin: 0; color: #58a6ff; letter-spacing: -1px; font-weight: 800; }
         .subtitle { color: #8b949e; font-size: 1.1rem; margin-top: 5px; }
 
         /* TABS */
-        .nav-tabs { display: flex; justify-content: center; gap: 10px; margin-bottom: 30px; }
-        .tab-btn { background: #161b22; border: 1px solid #30363d; color: #c9d1d9; padding: 8px 16px; border-radius: 6px; cursor: pointer; font-weight: 600; transition: 0.2s; }
+        .nav-tabs { display: flex; justify-content: center; gap: 10px; margin-bottom: 30px; flex-wrap: wrap; }
+        .tab-btn { background: #161b22; border: 1px solid #30363d; color: #c9d1d9; padding: 10px 20px; border-radius: 6px; cursor: pointer; font-weight: 600; transition: 0.2s; }
         .tab-btn.active { border-color: #58a6ff; color: #58a6ff; background: rgba(88, 166, 255, 0.1); }
+        .tab-btn:hover { background: #21262d; }
 
         /* SEARCH bar */
-        #searchBar { width: 100%; padding: 12px; border-radius: 6px; border: 1px solid #30363d; background: #010409; color: white; margin-bottom: 20px; box-sizing: border-box; outline: none; }
-        #searchBar:focus { border-color: #58a6ff; }
+        #searchBar { width: 100%; padding: 15px; border-radius: 8px; border: 1px solid #30363d; background: #010409; color: white; margin-bottom: 30px; box-sizing: border-box; outline: none; font-size: 1rem; }
+        #searchBar:focus { border-color: #58a6ff; box-shadow: 0 0 0 3px rgba(88, 166, 255, 0.3); }
 
         /* CARDS */
-        .card { background: #161b22; border: 1px solid #30363d; border-radius: 8px; padding: 20px; margin-bottom: 20px; }
-        .tag { font-size: 0.7rem; color: #58a6ff; border: 1px solid #58a6ff; padding: 2px 6px; border-radius: 3px; margin-bottom: 10px; display: inline-block; text-transform: uppercase; }
-        pre { background: #010409; padding: 15px; border-radius: 6px; overflow-x: auto; border: 1px solid #30363d; position: relative; }
-        code { color: #d2a8ff; font-family: "SFMono-Regular", monospace; }
-        .copy-btn { position: absolute; right: 10px; top: 10px; background: #21262d; border: 1px solid #30363d; color: #8b949e; padding: 4px 8px; border-radius: 4px; cursor: pointer; font-size: 0.7rem; }
+        .card { background: #161b22; border: 1px solid #30363d; border-radius: 8px; padding: 20px; margin-bottom: 25px; transition: transform 0.2s; }
+        .card:hover { transform: translateY(-3px); border-color: #444c56; }
+        .tag { font-size: 0.7rem; color: #58a6ff; border: 1px solid #58a6ff; padding: 2px 8px; border-radius: 12px; margin-bottom: 12px; display: inline-block; text-transform: uppercase; font-weight: bold; }
+        h3 { margin-top: 0; font-size: 1.3rem; color: #f0f6fc; }
+        pre { background: #010409; padding: 15px; border-radius: 6px; overflow-x: auto; border: 1px solid #30363d; position: relative; margin-top: 10px; }
+        code { color: #d2a8ff; font-family: "SFMono-Regular", Consolas, monospace; line-height: 1.5; }
+        .copy-btn { position: absolute; right: 10px; top: 10px; background: #21262d; border: 1px solid #30363d; color: #8b949e; padding: 5px 10px; border-radius: 4px; cursor: pointer; font-size: 0.75rem; transition: 0.2s; }
+        .copy-btn:hover { background: #30363d; color: #f0f6fc; }
 
         /* SUBMIT FORM SECTION */
-        .submit-section { background: #161b22; border: 1px solid #30363d; border-radius: 12px; padding: 30px; margin-top: 60px; box-shadow: 0 10px 30px rgba(0,0,0,0.5); }
+        .submit-section { background: #161b22; border: 1px solid #30363d; border-radius: 12px; padding: 30px; margin-top: 60px; box-shadow: 0 4px 20px rgba(0,0,0,0.4); }
         .submit-section h2 { color: #58a6ff; margin-top: 0; }
         .form-group { margin-bottom: 15px; }
         label { display: block; margin-bottom: 8px; font-size: 0.9rem; color: #8b949e; }
@@ -41,6 +45,9 @@
         input:focus, textarea:focus { border-color: #58a6ff; outline: none; }
         .send-btn { background: #238636; color: white; border: none; padding: 14px; border-radius: 6px; font-weight: bold; cursor: pointer; width: 100%; font-size: 1rem; margin-top: 10px; transition: 0.3s; }
         .send-btn:hover { background: #2ea043; transform: translateY(-2px); }
+
+        /* FOOTER */
+        footer { text-align: center; padding: 40px 0 20px 0; border-top: 1px solid #30363d; margin-top: 80px; color: #8b949e; font-size: 0.9rem; }
     </style>
 </head>
 <body>
@@ -48,7 +55,7 @@
 <div class="container">
     <header>
         <h1>CodeAvail</h1>
-        <p class="subtitle">The Developer's Personal Code Vault</p>
+        <p class="subtitle">Premium Snippets for the Modern Developer</p>
     </header>
 
     <div class="nav-tabs">
@@ -58,9 +65,10 @@
         <button class="tab-btn" onclick="filter('Web')">HTML/CSS</button>
     </div>
 
-    <input type="text" id="searchBar" placeholder="Search by name or code..." onkeyup="runSearch()">
+    <input type="text" id="searchBar" placeholder="Search for a code keyword..." onkeyup="runSearch()">
 
     <div id="snippetList">
+        
         <div class="card" data-cat="Python">
             <span class="tag">Python</span>
             <h3>Check if File Exists</h3>
@@ -71,15 +79,44 @@ if os.path.isfile('data.txt'):
 
         <div class="card" data-cat="Python">
             <span class="tag">Python</span>
-            <h3>Dictionary Merge</h3>
-            <pre><button class="copy-btn" onclick="copy(this)">Copy</button><code># For Python 3.9+
-merged = dict1 | dict2</code></pre>
+            <h3>Random Password Generator</h3>
+            <pre><button class="copy-btn" onclick="copy(this)">Copy</button><code>import secrets
+import string
+alphabet = string.ascii_letters + string.digits
+password = ''.join(secrets.choice(alphabet) for i in range(12))</code></pre>
+        </div>
+
+        <div class="card" data-cat="Python">
+            <span class="tag">Python</span>
+            <h3>Simple Web Scraper</h3>
+            <pre><button class="copy-btn" onclick="copy(this)">Copy</button><code>import requests
+from bs4 import BeautifulSoup
+url = 'https://example.com'
+res = requests.get(url)
+soup = BeautifulSoup(res.text, 'html.parser')
+print(soup.title.text)</code></pre>
         </div>
 
         <div class="card" data-cat="JavaScript">
             <span class="tag">JavaScript</span>
-            <h3>Scroll to Top</h3>
+            <h3>Smooth Scroll to Top</h3>
             <pre><button class="copy-btn" onclick="copy(this)">Copy</button><code>window.scrollTo({top: 0, behavior: 'smooth'});</code></pre>
+        </div>
+
+        <div class="card" data-cat="JavaScript">
+            <span class="tag">JavaScript</span>
+            <h3>Copy to Clipboard function</h3>
+            <pre><button class="copy-btn" onclick="copy(this)">Copy</button><code>const copyText = (text) => {
+  navigator.clipboard.writeText(text);
+};</code></pre>
+        </div>
+
+        <div class="card" data-cat="JavaScript">
+            <span class="tag">JavaScript</span>
+            <h3>Email Validator (Regex)</h3>
+            <pre><button class="copy-btn" onclick="copy(this)">Copy</button><code>const validateEmail = (email) => {
+  return String(email).toLowerCase().match(/\S+@\S+\.\S+/);
+};</code></pre>
         </div>
 
         <div class="card" data-cat="Web">
@@ -91,11 +128,36 @@ merged = dict1 | dict2</code></pre>
   -webkit-text-fill-color: transparent;
 }</code></pre>
         </div>
+
+        <div class="card" data-cat="Web">
+            <span class="tag">HTML/CSS</span>
+            <h3>Glassmorphism Card Style</h3>
+            <pre><button class="copy-btn" onclick="copy(this)">Copy</button><code>.glass {
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 15px;
+}</code></pre>
+        </div>
+
+        <div class="card" data-cat="Web">
+            <span class="tag">HTML/CSS</span>
+            <h3>Neon Glow Button</h3>
+            <pre><button class="copy-btn" onclick="copy(this)">Copy</button><code>.neon-btn {
+  border: 2px solid #00f3ff;
+  box-shadow: 0 0 10px #00f3ff;
+  transition: 0.3s;
+}
+.neon-btn:hover {
+  box-shadow: 0 0 25px #00f3ff;
+}</code></pre>
+        </div>
+        
     </div>
 
     <div class="submit-section">
         <h2>🚀 Submit a Snippet</h2>
-        <p style="color: #8b949e; margin-bottom: 25px;">Help build the library! Your submission will be sent to Shampi for review.</p>
+        <p style="color: #8b949e;">Help grow our database! Your code will be reviewed by Owner.</p>
         
         <form action="https://formspree.io/f/xkovndyj" method="POST">
             <div class="form-group">
@@ -109,15 +171,19 @@ merged = dict1 | dict2</code></pre>
             </div>
             <div class="form-group">
                 <label>Snippet Title</label>
-                <input type="text" name="title" placeholder="e.g., Reverse a String" required>
+                <input type="text" name="title" placeholder="e.g. Reverse a String" required>
             </div>
             <div class="form-group">
                 <label>The Code</label>
                 <textarea name="code" rows="6" placeholder="Paste your code here..." required></textarea>
             </div>
-            <button type="submit" class="send-btn">Send Snippet to Shampi</button>
+            <button type="submit" class="send-btn">Submit to CodeAvail</button>
         </form>
     </div>
+
+    <footer>
+        <p>&copy; 2026 CodeAvail. Created by Maheen Touseef.</p>
+    </footer>
 </div>
 
 <script>
