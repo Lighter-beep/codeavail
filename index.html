@@ -86,6 +86,17 @@ alphabet = string.ascii_letters + string.digits
 password = ''.join(secrets.choice(alphabet) for i in range(12))</code></pre>
         </div>
 
+        <div class="card" data-cat="Python">
+            <span class="tag">Python</span>
+            <h3>Simple Web Scraper</h3>
+            <pre><button class="copy-btn" onclick="copy(this)">Copy</button><code>import requests
+from bs4 import BeautifulSoup
+url = 'https://example.com'
+res = requests.get(url)
+soup = BeautifulSoup(res.text, 'html.parser')
+print(soup.title.text)</code></pre>
+        </div>
+
         <div class="card" data-cat="JavaScript">
             <span class="tag">JavaScript</span>
             <h3>Smooth Scroll to Top</h3>
@@ -97,6 +108,14 @@ password = ''.join(secrets.choice(alphabet) for i in range(12))</code></pre>
             <h3>Copy to Clipboard function</h3>
             <pre><button class="copy-btn" onclick="copy(this)">Copy</button><code>const copyText = (text) => {
   navigator.clipboard.writeText(text);
+};</code></pre>
+        </div>
+
+        <div class="card" data-cat="JavaScript">
+            <span class="tag">JavaScript</span>
+            <h3>Email Validator (Regex)</h3>
+            <pre><button class="copy-btn" onclick="copy(this)">Copy</button><code>const validateEmail = (email) => {
+  return String(email).toLowerCase().match(/\S+@\S+\.\S+/);
 };</code></pre>
         </div>
 
@@ -118,6 +137,19 @@ password = ''.join(secrets.choice(alphabet) for i in range(12))</code></pre>
   backdrop-filter: blur(10px);
   border: 1px solid rgba(255, 255, 255, 0.2);
   border-radius: 15px;
+}</code></pre>
+        </div>
+
+        <div class="card" data-cat="Web">
+            <span class="tag">HTML/CSS</span>
+            <h3>Neon Glow Button</h3>
+            <pre><button class="copy-btn" onclick="copy(this)">Copy</button><code>.neon-btn {
+  border: 2px solid #00f3ff;
+  box-shadow: 0 0 10px #00f3ff;
+  transition: 0.3s;
+}
+.neon-btn:hover {
+  box-shadow: 0 0 25px #00f3ff;
 }</code></pre>
         </div>
         
