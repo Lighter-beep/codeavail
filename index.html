@@ -3,216 +3,118 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>CodeAvail | Developer Library</title>
+    <title>CodeAvail | Premium Developer Snippets</title>
     <meta name="google-site-verification" content="r42tU2KUmT1Dxhfnc2ldDGKtgdbcF7K51VfeMNsJb8U" />
+    <meta name="description" content="A curated library of premium code snippets for Python, JavaScript, and Web Development, managed by Maheen Touseef.">
     
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism-tomorrow.min.css" rel="stylesheet" />
+
     <style>
-        /* CORE THEME */
         body { background-color: #0d1117; color: #c9d1d9; font-family: -apple-system, sans-serif; margin: 0; padding: 0; scroll-behavior: smooth; }
         .container { max-width: 900px; margin: 0 auto; padding: 40px 20px; }
-        
-        /* HEADER */
-        header { text-align: center; padding-bottom: 40px; }
+        header { text-align: center; padding-bottom: 50px; }
         h1 { font-size: 3.5rem; margin: 0; color: #58a6ff; letter-spacing: -1px; font-weight: 800; }
-        .subtitle { color: #8b949e; font-size: 1.1rem; margin-top: 5px; }
-
-        /* TABS */
-        .nav-tabs { display: flex; justify-content: center; gap: 10px; margin-bottom: 30px; flex-wrap: wrap; }
-        .tab-btn { background: #161b22; border: 1px solid #30363d; color: #c9d1d9; padding: 10px 20px; border-radius: 6px; cursor: pointer; font-weight: 600; transition: 0.2s; }
+        .subtitle { color: #8b949e; font-size: 1.2rem; margin-top: 8px; }
+        .nav-tabs { display: flex; justify-content: center; gap: 12px; margin-bottom: 30px; flex-wrap: wrap; }
+        .tab-btn { background: #161b22; border: 1px solid #30363d; color: #c9d1d9; padding: 10px 22px; border-radius: 6px; cursor: pointer; font-weight: 600; transition: 0.3s; }
         .tab-btn.active { border-color: #58a6ff; color: #58a6ff; background: rgba(88, 166, 255, 0.1); }
-        .tab-btn:hover { background: #21262d; }
-
-        /* SEARCH bar */
-        #searchBar { width: 100%; padding: 15px; border-radius: 8px; border: 1px solid #30363d; background: #010409; color: white; margin-bottom: 30px; box-sizing: border-box; outline: none; font-size: 1rem; }
-        #searchBar:focus { border-color: #58a6ff; box-shadow: 0 0 0 3px rgba(88, 166, 255, 0.3); }
-
-        /* CARDS */
-        .card { background: #161b22; border: 1px solid #30363d; border-radius: 8px; padding: 20px; margin-bottom: 25px; transition: transform 0.2s; }
-        .card:hover { transform: translateY(-3px); border-color: #444c56; }
-        .tag { font-size: 0.7rem; color: #58a6ff; border: 1px solid #58a6ff; padding: 2px 8px; border-radius: 12px; margin-bottom: 12px; display: inline-block; text-transform: uppercase; font-weight: bold; }
-        h3 { margin-top: 0; font-size: 1.3rem; color: #f0f6fc; }
-        pre { background: #010409; padding: 15px; border-radius: 6px; overflow-x: auto; border: 1px solid #30363d; position: relative; margin-top: 10px; }
-        code { color: #d2a8ff; font-family: "SFMono-Regular", Consolas, monospace; line-height: 1.5; }
-        .copy-btn { position: absolute; right: 10px; top: 10px; background: #21262d; border: 1px solid #30363d; color: #8b949e; padding: 5px 10px; border-radius: 4px; cursor: pointer; font-size: 0.75rem; transition: 0.2s; }
-        .copy-btn:hover { background: #30363d; color: #f0f6fc; }
-
-        /* SUBMIT FORM SECTION */
-        .submit-section { background: #161b22; border: 1px solid #30363d; border-radius: 12px; padding: 30px; margin-top: 60px; box-shadow: 0 4px 20px rgba(0,0,0,0.4); }
-        .submit-section h2 { color: #58a6ff; margin-top: 0; }
-        .form-group { margin-bottom: 15px; }
-        label { display: block; margin-bottom: 8px; font-size: 0.9rem; color: #8b949e; }
-        input, textarea, select { width: 100%; padding: 12px; background: #010409; border: 1px solid #30363d; color: white; border-radius: 6px; box-sizing: border-box; font-family: inherit; }
-        input:focus, textarea:focus { border-color: #58a6ff; outline: none; }
-        .send-btn { background: #238636; color: white; border: none; padding: 14px; border-radius: 6px; font-weight: bold; cursor: pointer; width: 100%; font-size: 1rem; margin-top: 10px; transition: 0.3s; }
-        .send-btn:hover { background: #2ea043; transform: translateY(-2px); }
-
-        /* FOOTER */
-        footer { text-align: center; padding: 40px 0 20px 0; border-top: 1px solid #30363d; margin-top: 80px; color: #8b949e; font-size: 0.9rem; }
+        #searchBar { width: 100%; padding: 18px; border-radius: 10px; border: 1px solid #30363d; background: #010409; color: white; margin-bottom: 40px; box-sizing: border-box; outline: none; font-size: 1.1rem; }
+        .card { background: #161b22; border: 1px solid #30363d; border-radius: 12px; padding: 25px; margin-bottom: 30px; transition: 0.3s; }
+        .card:hover { transform: translateY(-5px); border-color: #58a6ff; }
+        .tag { font-size: 0.75rem; color: #58a6ff; border: 1px solid #58a6ff; padding: 3px 10px; border-radius: 20px; margin-bottom: 15px; display: inline-block; text-transform: uppercase; font-weight: bold; }
+        h3 { margin: 0 0 15px 0; font-size: 1.5rem; color: #f0f6fc; }
+        pre[class*="language-"] { background: #010409 !important; border: 1px solid #30363d; border-radius: 8px; margin-top: 10px; position: relative; padding: 20px !important; }
+        .copy-btn { position: absolute; right: 12px; top: 12px; background: #21262d; border: 1px solid #30363d; color: #8b949e; padding: 6px 12px; border-radius: 6px; cursor: pointer; font-size: 0.8rem; z-index: 10; }
+        .submit-section { background: #161b22; border: 1px solid #30363d; border-radius: 15px; padding: 40px; margin-top: 60px; text-align: center; }
+        .send-btn { background: #238636; color: white; border: none; padding: 16px; border-radius: 8px; font-weight: bold; cursor: pointer; width: 100%; font-size: 1.1rem; transition: 0.3s; }
+        #success-msg { display: none; color: #3fb950; font-weight: bold; margin-top: 20px; }
+        footer { text-align: center; padding: 60px 0 30px 0; border-top: 1px solid #30363d; margin-top: 80px; color: #8b949e; }
+        .top-btn { position: fixed; bottom: 30px; right: 30px; background: #58a6ff; color: white; width: 45px; height: 45px; border-radius: 50%; display: flex; align-items: center; justify-content: center; text-decoration: none; opacity: 0; transition: 0.3s; z-index: 100; }
+        .top-btn.visible { opacity: 1; }
     </style>
 </head>
 <body>
 
+<a href="#" class="top-btn" id="topBtn">↑</a>
+
 <div class="container">
     <header>
         <h1>CodeAvail</h1>
-        <p class="subtitle">Premium Snippets for the Modern Developer</p>
+        <p class="subtitle">Curated by Maheen Touseef</p>
     </header>
 
     <div class="nav-tabs">
-        <button class="tab-btn active" onclick="filter('all')">All</button>
+        <button class="tab-btn active" onclick="filter('all')">All Library</button>
         <button class="tab-btn" onclick="filter('Python')">Python</button>
         <button class="tab-btn" onclick="filter('JavaScript')">JavaScript</button>
         <button class="tab-btn" onclick="filter('Web')">HTML/CSS</button>
     </div>
 
-    <input type="text" id="searchBar" placeholder="Search for a code keyword..." onkeyup="runSearch()">
+    <input type="text" id="searchBar" placeholder="Search snippets..." onkeyup="runSearch()">
 
     <div id="snippetList">
-        
-        <div class="card" data-cat="Python">
-            <span class="tag">Python</span>
-            <h3>Check if File Exists</h3>
-            <pre><button class="copy-btn" onclick="copy(this)">Copy</button><code>import os
-if os.path.isfile('data.txt'):
-    print("File found!")</code></pre>
-        </div>
-
-        <div class="card" data-cat="Python">
-            <span class="tag">Python</span>
-            <h3>Random Password Generator</h3>
-            <pre><button class="copy-btn" onclick="copy(this)">Copy</button><code>import secrets
-import string
+        <div class="card" data-cat="Python"><span class="tag">Python</span><h3>Random Password Generator</h3><pre class="language-python"><button class="copy-btn" onclick="copy(this)">Copy</button><code>import secrets, string
 alphabet = string.ascii_letters + string.digits
-password = ''.join(secrets.choice(alphabet) for i in range(12))</code></pre>
-        </div>
-
-        <div class="card" data-cat="Python">
-            <span class="tag">Python</span>
-            <h3>Simple Web Scraper</h3>
-            <pre><button class="copy-btn" onclick="copy(this)">Copy</button><code>import requests
+password = ''.join(secrets.choice(alphabet) for i in range(12))</code></pre></div>
+        <div class="card" data-cat="Python"><span class="tag">Python</span><h3>Web Scraper Starter</h3><pre class="language-python"><button class="copy-btn" onclick="copy(this)">Copy</button><code>import requests
 from bs4 import BeautifulSoup
-url = 'https://example.com'
-res = requests.get(url)
-soup = BeautifulSoup(res.text, 'html.parser')
-print(soup.title.text)</code></pre>
-        </div>
+soup = BeautifulSoup(requests.get('https://example.com').text, 'html.parser')</code></pre></div>
+        <div class="card" data-cat="Python"><span class="tag">Python</span><h3>File Existence Check</h3><pre class="language-python"><button class="copy-btn" onclick="copy(this)">Copy</button><code>import os
+if os.path.exists("file.txt"): print("Found!")</code></pre></div>
 
-        <div class="card" data-cat="JavaScript">
-            <span class="tag">JavaScript</span>
-            <h3>Smooth Scroll to Top</h3>
-            <pre><button class="copy-btn" onclick="copy(this)">Copy</button><code>window.scrollTo({top: 0, behavior: 'smooth'});</code></pre>
-        </div>
+        <div class="card" data-cat="JavaScript"><span class="tag">JavaScript</span><h3>Smooth Scroll to Top</h3><pre class="language-javascript"><button class="copy-btn" onclick="copy(this)">Copy</button><code>const toTop = () => window.scrollTo({top: 0, behavior: 'smooth'});</code></pre></div>
+        <div class="card" data-cat="JavaScript"><span class="tag">JavaScript</span><h3>Copy to Clipboard</h3><pre class="language-javascript"><button class="copy-btn" onclick="copy(this)">Copy</button><code>const copyToClip = (text) => navigator.clipboard.writeText(text);</code></pre></div>
+        <div class="card" data-cat="JavaScript"><span class="tag">JavaScript</span><h3>Email Validator</h3><pre class="language-javascript"><button class="copy-btn" onclick="copy(this)">Copy</button><code>const isEmail = (str) => /^\S+@\S+\.\S+$/.test(str);</code></pre></div>
 
-        <div class="card" data-cat="JavaScript">
-            <span class="tag">JavaScript</span>
-            <h3>Copy to Clipboard function</h3>
-            <pre><button class="copy-btn" onclick="copy(this)">Copy</button><code>const copyText = (text) => {
-  navigator.clipboard.writeText(text);
-};</code></pre>
-        </div>
-
-        <div class="card" data-cat="JavaScript">
-            <span class="tag">JavaScript</span>
-            <h3>Email Validator (Regex)</h3>
-            <pre><button class="copy-btn" onclick="copy(this)">Copy</button><code>const validateEmail = (email) => {
-  return String(email).toLowerCase().match(/\S+@\S+\.\S+/);
-};</code></pre>
-        </div>
-
-        <div class="card" data-cat="Web">
-            <span class="tag">HTML/CSS</span>
-            <h3>Gradient Text Effect</h3>
-            <pre><button class="copy-btn" onclick="copy(this)">Copy</button><code>.text {
-  background: linear-gradient(to right, blue, red);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-}</code></pre>
-        </div>
-
-        <div class="card" data-cat="Web">
-            <span class="tag">HTML/CSS</span>
-            <h3>Glassmorphism Card Style</h3>
-            <pre><button class="copy-btn" onclick="copy(this)">Copy</button><code>.glass {
-  background: rgba(255, 255, 255, 0.1);
-  backdrop-filter: blur(10px);
-  border: 1px solid rgba(255, 255, 255, 0.2);
-  border-radius: 15px;
-}</code></pre>
-        </div>
-
-        <div class="card" data-cat="Web">
-            <span class="tag">HTML/CSS</span>
-            <h3>Neon Glow Button</h3>
-            <pre><button class="copy-btn" onclick="copy(this)">Copy</button><code>.neon-btn {
-  border: 2px solid #00f3ff;
-  box-shadow: 0 0 10px #00f3ff;
-  transition: 0.3s;
-}
-.neon-btn:hover {
-  box-shadow: 0 0 25px #00f3ff;
-}</code></pre>
-        </div>
-        
+        <div class="card" data-cat="Web"><span class="tag">HTML/CSS</span><h3>Neon Glow Button</h3><pre class="language-css"><button class="copy-btn" onclick="copy(this)">Copy</button><code>.neon { border: 2px solid #00f3ff; box-shadow: 0 0 15px #00f3ff; }</code></pre></div>
+        <div class="card" data-cat="Web"><span class="tag">HTML/CSS</span><h3>Glassmorphism</h3><pre class="language-css"><button class="copy-btn" onclick="copy(this)">Copy</button><code>.glass { background: rgba(255,255,255,0.1); backdrop-filter: blur(15px); }</code></pre></div>
+        <div class="card" data-cat="Web"><span class="tag">HTML/CSS</span><h3>Gradient Text</h3><pre class="language-css"><button class="copy-btn" onclick="copy(this)">Copy</button><code>.grad { background: linear-gradient(45deg, blue, purple); -webkit-background-clip: text; }</code></pre></div>
     </div>
 
     <div class="submit-section">
-        <h2>🚀 Submit a Snippet</h2>
-        <p style="color: #8b949e;">Help grow our database! Your code will be reviewed by Owner.</p>
-        
-        <form action="https://formspree.io/f/xkovndyj" method="POST">
-            <div class="form-group">
-                <label>Programming Language</label>
-                <select name="language">
-                    <option>Python</option>
-                    <option>JavaScript</option>
-                    <option>HTML/CSS</option>
-                    <option>Other</option>
-                </select>
-            </div>
-            <div class="form-group">
-                <label>Snippet Title</label>
-                <input type="text" name="title" placeholder="e.g. Reverse a String" required>
-            </div>
-            <div class="form-group">
-                <label>The Code</label>
-                <textarea name="code" rows="6" placeholder="Paste your code here..." required></textarea>
-            </div>
+        <h2>🚀 Contribute</h2>
+        <form action="https://formspree.io/f/xkovndyj" method="POST" onsubmit="showSuccess()">
+            <input type="text" name="title" placeholder="Snippet Title" required style="margin-bottom:10px;"><br>
+            <textarea name="code" rows="5" placeholder="Paste code here..." required style="width:100%; background:#010409; color:white; border:1px solid #30363d; border-radius:8px; padding:10px; box-sizing:border-box;"></textarea>
             <button type="submit" class="send-btn">Submit to CodeAvail</button>
         </form>
+        <div id="success-msg">✓ Thanks! Maheen will review it shortly.</div>
     </div>
 
     <footer>
-        <p>&copy; 2026 CodeAvail. Created by Maheen Touseef.</p>
+        <p>&copy; 2026 CodeAvail. Created by <strong>Maheen Touseef</strong>.</p>
     </footer>
 </div>
 
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-python.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-javascript.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-css.min.js"></script>
+
 <script>
     let activeCat = 'all';
-
     function filter(cat) {
         activeCat = cat;
-        document.querySelectorAll('.tab-btn').forEach(btn => {
-            btn.classList.toggle('active', btn.innerText === cat || (cat === 'all' && btn.innerText === 'All'));
-        });
+        document.querySelectorAll('.tab-btn').forEach(btn => btn.classList.toggle('active', btn.innerText.includes(cat) || (cat === 'all' && btn.innerText.includes('All'))));
         runSearch();
     }
-
     function runSearch() {
         let term = document.getElementById('searchBar').value.toLowerCase();
         document.querySelectorAll('.card').forEach(card => {
-            let cat = card.getAttribute('data-cat');
-            let text = card.innerText.toLowerCase();
-            let show = (activeCat === 'all' || cat === activeCat) && text.includes(term);
+            let show = (activeCat === 'all' || card.getAttribute('data-cat') === activeCat) && card.innerText.toLowerCase().includes(term);
             card.style.display = show ? "block" : "none";
         });
     }
-
     function copy(btn) {
-        let codeText = btn.nextElementSibling.innerText;
-        navigator.clipboard.writeText(codeText);
-        btn.innerText = "Copied!";
-        setTimeout(() => btn.innerText = "Copy", 2000);
+        navigator.clipboard.writeText(btn.nextElementSibling.innerText);
+        btn.innerText = "✓";
+        setTimeout(() => { btn.innerText = "Copy"; }, 2000);
     }
+    function showSuccess() { document.getElementById('success-msg').style.display = "block"; }
+    window.onscroll = function() {
+        let btn = document.getElementById("topBtn");
+        btn.classList.toggle("visible", window.scrollY > 300);
+    };
 </script>
 </body>
 </html>
