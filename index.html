@@ -1,10 +1,12 @@
 <!DOCTYPE html>
 <html lang="en">
-<head></head>
+<head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>CodeAvail | Maheen Touseef</title>
-    <link rel="icon" type="image/png" href="favicon.png.ping">
+    
+    <link rel="icon" type="image/png" href="favicon.png.png">
+    
     <meta name="google-site-verification" content="r42tU2KUmT1Dxhfnc2ldDGKtgdbcF7K51VfeMNsJb8U" />
     <link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism-tomorrow.min.css" rel="stylesheet" />
 
@@ -13,12 +15,28 @@
         body { background: var(--bg); color: #adbac7; font-family: 'Segoe UI', sans-serif; margin: 0; }
         .container { max-width: 900px; margin: 0 auto; padding: 20px; }
 
-        /* HEADER & BUILT-IN LOGO */
+        /* HEADER & LOGO */
         header { text-align: center; padding: 40px 0; }
-        .logo-svg { width: 60px; height: 60px; color: var(--accent); filter: drop-shadow(0 0 10px rgba(0,212,255,0.4)); margin-bottom: 10px; }
+        .logo-img { width: 80px; height: 80px; border-radius: 20%; margin-bottom: 15px; box-shadow: 0 0 20px rgba(0, 212, 255, 0.3); }
         h1 { font-size: 3.5rem; margin: 0; color: var(--accent); font-weight: 900; letter-spacing: -2px; }
 
-        /* FIXED NAV TABS (THE MISSING PIECE) */
+        /* STATS BAR WITH LIVE PING */
+        .stats-bar { display: flex; justify-content: center; gap: 40px; margin-bottom: 40px; padding: 20px; background: rgba(255,255,255,0.03); border-radius: 15px; border: 1px solid var(--border); }
+        .stat-item { text-align: center; }
+        .stat-num { display: block; font-size: 1.5rem; font-weight: bold; color: white; }
+        .stat-label { font-size: 0.8rem; color: #768390; text-transform: uppercase; }
+        
+        .ping {
+            display: inline-block; width: 8px; height: 8px; background-color: #00ff88;
+            border-radius: 50%; margin-right: 5px; vertical-align: middle; position: relative;
+        }
+        .ping::after {
+            content: ''; position: absolute; width: 100%; height: 100%; background-color: #00ff88;
+            border-radius: 50%; left: 0; top: 0; animation: pulse 1.5s infinite;
+        }
+        @keyframes pulse { 0% { transform: scale(1); opacity: 0.8; } 100% { transform: scale(3); opacity: 0; } }
+
+        /* NAV TABS */
         .nav-container { position: sticky; top: 0; background: var(--bg); z-index: 1000; padding: 15px 0; border-bottom: 1px solid var(--border); }
         #searchBar { width: 100%; padding: 12px; border-radius: 10px; border: 1px solid var(--border); background: #1c2128; color: white; margin-bottom: 15px; box-sizing: border-box; }
         .tabs { display: flex; gap: 10px; overflow-x: auto; scrollbar-width: none; }
@@ -26,13 +44,13 @@
         .tab-btn.active { border-color: var(--accent); color: var(--accent); background: rgba(0, 212, 255, 0.1); }
 
         /* CARDS */
-        .card { background: var(--card); border: 1px solid var(--border); border-radius: 16px; padding: 25px; margin-top: 25px; position: relative; }
+        .card { background: var(--card); border: 1px solid var(--border); border-radius: 16px; padding: 25px; margin-top: 25px; position: relative; transition: 0.3s; }
+        .card:hover { border-color: var(--accent); transform: translateY(-3px); }
         .lang-tag { font-size: 0.7rem; color: var(--accent); border: 1px solid var(--accent); padding: 2px 8px; border-radius: 5px; text-transform: uppercase; }
         h3 { margin: 15px 0 10px; color: #f0f6fc; }
-        pre { border-radius: 10px !important; background: #0d1117 !important; padding: 1.2rem !important; white-space: pre-wrap !important; }
+        pre { border-radius: 10px !important; background: #0d1117 !important; padding: 1.2rem !important; white-space: pre-wrap !important; word-break: break-all; }
         .copy-btn { position: absolute; right: 25px; top: 25px; background: var(--accent); color: #000; border: none; padding: 5px 12px; border-radius: 6px; cursor: pointer; font-weight: bold; font-size: 0.7rem; }
 
-        /* FOOTER */
         footer { text-align: center; padding: 50px 0; color: #545d68; border-top: 1px solid var(--border); margin-top: 50px; }
     </style>
 </head>
@@ -40,12 +58,16 @@
 
 <div class="container">
     <header>
-        <svg class="logo-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-            <path d="M12 12c-2-2.67-4-4-6-4a4 4 0 1 0 0 8c2 0 4-1.33 6-4Zm0 0c2 2.67 4 4 6 4a4 4 0 0 0 0-8c-2 0-4 1.33-6 4Z"></path>
-        </svg>
+        <img src="favicon.png.png" alt="Logo" class="logo-img">
         <h1>CodeAvail</h1>
         <p style="color: #768390;">The Infinite Library by Maheen Touseef</p>
     </header>
+
+    <div class="stats-bar">
+        <div class="stat-item"><span class="stat-num"><span class="ping"></span> 20+</span><span class="stat-label">Snippets</span></div>
+        <div class="stat-item"><span class="stat-num">3</span><span class="stat-label">Languages</span></div>
+        <div class="stat-item"><span class="stat-num">Fast</span><span class="stat-label">SEO Ready</span></div>
+    </div>
 
     <div class="nav-container">
         <input type="text" id="searchBar" placeholder="Search snippets..." onkeyup="runFilter()">
@@ -64,64 +86,4 @@
             <h3>Image Metadata Extractor</h3>
             <pre class="language-python"><code>from PIL import Image
 from PIL.ExifTags import TAGS
-img = Image.open('photo.jpg')
-info = {TAGS.get(k): v for k, v in img._getexif().items()}</code></pre>
-        </div>
-
-        <div class="card" data-cat="JavaScript">
-            <span class="lang-tag">JavaScript</span>
-            <button class="copy-btn" onclick="copyCode(this)">Copy</button>
-            <h3>Smooth Scroll to Top</h3>
-            <pre class="language-javascript"><code>window.scrollTo({ top: 0, behavior: 'smooth' });</code></pre>
-        </div>
-
-        <div class="card" data-cat="Web">
-            <span class="lang-tag">CSS</span>
-            <button class="copy-btn" onclick="copyCode(this)">Copy</button>
-            <h3>Glassmorphism Effect</h3>
-            <pre class="language-css"><code>.glass {
-  background: rgba(255, 255, 255, 0.05);
-  backdrop-filter: blur(10px);
-  border: 1px solid rgba(255, 255, 255, 0.1);
-}</code></pre>
-        </div>
-    </div>
-
-    <footer>
-        &copy; 2026 CodeAvail &bull; Built by Maheen Touseef
-    </footer>
-</div>
-
-<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-python.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-javascript.min.js"></script>
-
-<script>
-    let currentCategory = 'all';
-
-    function setCategory(cat) {
-        currentCategory = cat;
-        document.querySelectorAll('.tab-btn').forEach(btn => {
-            btn.classList.toggle('active', btn.innerText.toLowerCase().includes(cat.toLowerCase()) || (cat === 'all' && btn.innerText === 'All'));
-        });
-        runFilter();
-    }
-
-    function runFilter() {
-        let query = document.getElementById('searchBar').value.toLowerCase();
-        document.querySelectorAll('.card').forEach(card => {
-            let matchesCat = (currentCategory === 'all' || card.dataset.cat === currentCategory);
-            let matchesSearch = card.innerText.toLowerCase().includes(query);
-            card.style.display = (matchesCat && matchesSearch) ? 'block' : 'none';
-        });
-    }
-
-    function copyCode(btn) {
-        let code = btn.parentElement.querySelector('code').innerText;
-        navigator.clipboard.writeText(code);
-        btn.innerText = 'Copied!';
-        setTimeout(() => btn.innerText = 'Copy', 2000);
-    }
-</script>
-</body>
-</html>
+img =
