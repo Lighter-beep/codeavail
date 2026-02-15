@@ -98,6 +98,9 @@
                 <div class="dot green"></div>
             </div>
             <img src="favicon.png.png" alt="Logo" class="logo-img" style="width:120px; height:120px; margin-bottom:15px; border-radius: 25px; box-shadow: 0 0 40px rgba(0, 212, 255, 0.25);">
+         <button id="themeToggle" style="position: absolute; top: 15px; right: 15px; background: none; border: 1px solid var(--border); color: var(--accent); cursor: pointer; border-radius: 8px; padding: 5px 10px; font-size: 0.6rem; font-family: monospace; z-index: 10;">
+    [ LIGHT_MODE ]
+</button>
             <h1>CodeAvail</h1>
             <div class="status-container">
                 <div class="ping"></div>
@@ -243,6 +246,37 @@ const timer = setInterval(() => {
         </div>
     </div>
 
+    <div class="card web-card" data-cat="Web">
+            <span class="lang-tag">Web</span>
+            <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+            <h3>Matrix Dots Preloader</h3>
+            <div class="demo-box">
+                <div style="display: grid; grid-template-columns: repeat(3, 15px); gap: 8px;">
+                    <div class="dot-pulse" style="width:12px; height:12px; background:var(--accent); border-radius:50%; animation: pulse-grid 1.2s infinite ease-in-out;"></div>
+                    <div class="dot-pulse" style="width:12px; height:12px; background:var(--accent); border-radius:50%; animation: pulse-grid 1.2s infinite ease-in-out 0.2s;"></div>
+                    <div class="dot-pulse" style="width:12px; height:12px; background:var(--accent); border-radius:50%; animation: pulse-grid 1.2s infinite ease-in-out 0.4s;"></div>
+                </div>
+                <style>
+                    @keyframes pulse-grid {
+                        0%, 100% { transform: scale(1); opacity: 1; }
+                        50% { transform: scale(0.3); opacity: 0.3; }
+                    }
+                </style>
+            </div>
+            <pre class="language-css"><code>/* HTML: <div class="grid"><div></div><div></div><div></div></div> */
+.grid { display: flex; gap: 10px; }
+.grid div {
+  width: 15px; height: 15px;
+  background: var(--accent);
+  border-radius: 50%;
+  animation: pulse 1.2s infinite ease-in-out;
+}
+@keyframes pulse {
+  0%, 100% { transform: scale(1); opacity: 1; }
+  50% { transform: scale(0.3); opacity: 0.3; }
+}</code></pre>
+        </div>
+
     <div class="contribute-box">
         <h2 style="color:white; margin-bottom:10px;">Submit Snippet</h2>
         <form action="https://formspree.io/f/xkovndyj" method="POST">
@@ -290,6 +324,27 @@ const timer = setInterval(() => {
         btn.innerText = 'Copied!';
         setTimeout(() => btn.innerText = 'Copy', 2000);
     }
+    // --- Theme Toggle Logic ---
+const toggleBtn = document.getElementById('themeToggle');
+let isLight = false;
+
+toggleBtn.addEventListener('click', () => {
+    isLight = !isLight;
+    if (isLight) {
+        document.documentElement.style.setProperty('--bg', '#ffffff');
+        document.documentElement.style.setProperty('--card', '#f6f8fa');
+        document.documentElement.style.setProperty('--border', '#d0d7de');
+        document.body.style.color = '#24292f';
+        toggleBtn.innerText = '[ DARK_MODE ]';
+    } else {
+        document.documentElement.style.setProperty('--bg', '#0b0e14');
+        document.documentElement.style.setProperty('--card', '#151921');
+        document.documentElement.style.setProperty('--border', '#2d333b');
+        document.body.style.color = '#adbac7';
+        toggleBtn.innerText = '[ LIGHT_MODE ]';
+    }
+});
+
 </script>
 </body>
 </html>
