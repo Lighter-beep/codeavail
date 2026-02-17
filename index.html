@@ -3,15 +3,15 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>CodeAvail | Library</title>
-    <meta name="description" content="CodeAvail: Premium Python and JavaScript snippets for developers.">
+    <title>CodeAvail | Premium Dev Library</title>
+    <meta name="description" content="Explore CodeAvail's curated library of high-performance Python, JavaScript, and HTML/CSS snippets for modern developers.">
     
     <link rel="icon" type="image/png" href="favicon.png.png">
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism-tomorrow.min.css" rel="stylesheet" />
+    <meta property="og:image" content="favicon.png.png">
 
     <style>
         :root { --accent: #00d4ff; --bg: #0b0e14; --card: #151921; --border: #2d333b; }
-        body { background: var(--bg); color: #adbac7; font-family: 'Segoe UI', sans-serif; margin: 0; line-height: 1.6; }
+        body { background: var(--bg); color: #adbac7; font-family: 'Segoe UI', sans-serif; margin: 0; line-height: 1.6; transition: background 0.3s, color 0.3s; }
         .container { max-width: 900px; margin: 0 auto; padding: 20px; }
 
         header { text-align: center; padding: 40px 0; }
@@ -24,6 +24,7 @@
             min-width: 350px;
             backdrop-filter: blur(10px);
             box-shadow: 0 10px 40px rgba(0,0,0,0.5);
+            position: relative;
         }
         .terminal-header { display: flex; gap: 6px; margin-bottom: 10px; }
         .dot { width: 10px; height: 10px; border-radius: 50%; }
@@ -41,43 +42,28 @@
         #searchBar { width: 100%; padding: 16px; border-radius: 12px; border: 1px solid var(--border); background: #1c2128; color: white; margin-bottom: 20px; box-sizing: border-box; outline: none; transition: 0.3s; }
         #searchBar:focus { border-color: var(--accent); box-shadow: 0 0 15px rgba(0, 212, 255, 0.1); }
         .tabs { display: flex; gap: 12px; overflow-x: auto; scrollbar-width: none; }
-        .tab-btn { background: var(--card); border: 1px solid var(--border); color: #768390; padding: 10px 24px; border-radius: 30px; cursor: pointer; font-weight: 600; transition: 0.3s; }
+        .tabs::-webkit-scrollbar { display: none; }
+        .tab-btn { background: var(--card); border: 1px solid var(--border); color: #768390; padding: 10px 24px; border-radius: 30px; cursor: pointer; font-weight: 600; transition: 0.3s; white-space: nowrap; }
         .tab-btn.active { border-color: var(--accent); color: var(--accent); background: rgba(0, 212, 255, 0.1); }
 
         .card { background: var(--card); border: 1px solid var(--border); border-radius: 20px; padding: 30px; margin-top: 30px; position: relative; transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275); }
         .card:hover { transform: translateY(-10px); border-color: var(--accent); box-shadow: 0 20px 40px rgba(0,0,0,0.4); }
 
-        /* --- HOVER REVEAL LOGIC --- */
-        .card.web-card .demo-box {
-            display: none; 
-            height: 150px;
-            align-items: center;
-            justify-content: center;
-            background: #0d1117;
-            border-radius: 12px;
-            margin-bottom: 15px;
-        }
+        .card.web-card .demo-box { display: none; height: 150px; align-items: center; justify-content: center; background: #0d1117; border-radius: 12px; margin-bottom: 15px; }
         .card.web-card:hover .demo-box { display: flex; }
         .card.web-card:hover pre { display: none; }
-
-        /* Subtle hint for Web cards */
-        .card.web-card::after {
-            content: "Hover to Preview Live";
-            position: absolute;
-            bottom: 15px;
-            right: 30px;
-            font-size: 0.65rem;
-            color: #545d68;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            opacity: 0.8;
-        }
+        .card.web-card::after { content: "Hover to Preview Live"; position: absolute; bottom: 15px; right: 30px; font-size: 0.65rem; color: #545d68; text-transform: uppercase; letter-spacing: 1px; opacity: 0.8; }
         .card.web-card:hover::after { display: none; }
-        /* -------------------------- */
-        
+
         .lang-tag { font-size: 0.7rem; color: var(--accent); border: 1px solid var(--accent); padding: 3px 10px; border-radius: 6px; text-transform: uppercase; font-weight: bold; }
         h3 { margin: 20px 0 12px; color: #f0f6fc; font-size: 1.4rem; }
-        pre { border-radius: 12px !important; background: #0d1117 !important; padding: 1.5rem !important; overflow-x: auto; border: 1px solid #21262d; }
+        pre { 
+    border-radius: 12px !important; 
+    background: var(--card) !important; 
+    padding: 1.5rem !important; 
+    overflow-x: auto; 
+    border: 1px solid var(--border); 
+}
         .copy-btn { position: absolute; right: 30px; top: 35px; background: var(--accent); color: #000; border: none; padding: 6px 14px; border-radius: 8px; cursor: pointer; font-weight: bold; }
 
         .contribute-box { margin-top: 80px; padding: 40px; border: 1px solid var(--border); border-radius: 24px; background: linear-gradient(145deg, #151921, #0b0e14); text-align: center; }
@@ -85,6 +71,9 @@
         .btn-submit { background: var(--accent); color: black; border: none; padding: 14px 40px; border-radius: 30px; font-weight: bold; cursor: pointer; }
 
         footer { text-align: center; padding: 60px 0; color: #545d68; border-top: 1px solid var(--border); margin-top: 80px; }
+
+        @keyframes pulse-grid { 0%, 100% { transform: scale(1); opacity: 1; } 50% { transform: scale(0.3); opacity: 0.3; } }
+        @keyframes breathe { from { opacity: 0.5; } to { opacity: 1; } }
     </style>
 </head>
 <body>
@@ -98,9 +87,9 @@
                 <div class="dot green"></div>
             </div>
             <img src="favicon.png.png" alt="Logo" class="logo-img" style="width:120px; height:120px; margin-bottom:15px; border-radius: 25px; box-shadow: 0 0 40px rgba(0, 212, 255, 0.25);">
-         <button id="themeToggle" style="position: absolute; top: 15px; right: 15px; background: none; border: 1px solid var(--border); color: var(--accent); cursor: pointer; border-radius: 8px; padding: 5px 10px; font-size: 0.6rem; font-family: monospace; z-index: 10;">
-    [ LIGHT_MODE ]
-</button>
+            <button id="themeToggle" style="position: absolute; top: 15px; right: 15px; background: none; border: 1px solid var(--border); color: var(--accent); cursor: pointer; border-radius: 8px; padding: 5px 10px; font-size: 0.6rem; font-family: monospace; z-index: 10;">
+                [ LIGHT_MODE ]
+            </button>
             <h1>CodeAvail</h1>
             <div class="status-container">
                 <div class="ping"></div>
@@ -128,41 +117,6 @@
 chars = string.ascii_letters + string.digits + "!"
 pwd = "".join(random.sample(chars, 12))
 print(f"Your Password: {pwd}")</code></pre>
-        </div>
-
-        <div class="card" data-cat="JavaScript">
-            <span class="lang-tag">JavaScript</span>
-            <button class="copy-btn" onclick="copyCode(this)">Copy</button>
-            <h3>Smooth Scroll to Top</h3>
-            <pre class="language-javascript"><code>const scrollToTop = () => {
-  window.scrollTo({ top: 0, behavior: 'smooth' });
-};</code></pre>
-        </div>
-
-        <div class="card web-card" data-cat="Web">
-            <span class="lang-tag">Web</span>
-            <button class="copy-btn" onclick="copyCode(this)">Copy</button>
-            <h3>Neon Scrollbar Style</h3>
-            <div class="demo-box" style="overflow-y: scroll; border: 1px solid #2d333b; padding: 15px; text-align: left;">
-                <div style="height: 400px; color: #545d68; font-family: monospace; font-size: 0.85rem; line-height: 1.8;">
-                    <p style="color: var(--accent); border-bottom: 1px solid #2d333b; padding-bottom: 5px; margin-top: 0;">// SCROLL TEST AREA</p>
-                    <p>• Engineered for dark interfaces.</p>
-                    <p>• Smooth transition enabled.</p>
-                    <p>• Custom thumb width: 8px.</p>
-                    <p>• Track color: #0b0e14.</p>
-                    <p style="margin-top: 40px;">Scrolling test content start...</p>
-                    <p>The neon effect is applied to the scrollbar thumb.</p>
-                    <p>This ensures a premium developer aesthetic.</p>
-                    <p style="margin-top: 80px; color: var(--accent);">[ MISSION ACCOMPLISHED ]</p>
-                    <p>You have reached the end of the demo.</p>
-                </div>
-            </div>
-            <pre class="language-css"><code>::-webkit-scrollbar { width: 8px; }
-::-webkit-scrollbar-track { background: #0b0e14; }
-::-webkit-scrollbar-thumb { 
-  background: var(--accent); 
-  border-radius: 10px; 
-}</code></pre>
         </div>
 
         <div class="card" data-cat="Python">
@@ -198,6 +152,15 @@ print(s.tinyurl.short('https://github.com/'))</code></pre>
         <div class="card" data-cat="JavaScript">
             <span class="lang-tag">JavaScript</span>
             <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+            <h3>Smooth Scroll to Top</h3>
+            <pre class="language-javascript"><code>const scrollToTop = () => {
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+};</code></pre>
+        </div>
+
+        <div class="card" data-cat="JavaScript">
+            <span class="lang-tag">JavaScript</span>
+            <button class="copy-btn" onclick="copyCode(this)">Copy</button>
             <h3>Secure API Data Fetch</h3>
             <pre class="language-javascript"><code>const getData = async (url) => {
     const res = await fetch(url);
@@ -215,6 +178,72 @@ print(s.tinyurl.short('https://github.com/'))</code></pre>
 };</code></pre>
         </div>
 
+        <div class="card" data-cat="Python">
+    <span class="lang-tag">Python</span>
+    <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+    <h3>FastAPI Minimal Server</h3>
+    <pre class="language-python"><code>from fastapi import FastAPI
+app = FastAPI()
+
+@app.get("/")
+def read_root():
+    return {"status": "active", "version": "1.0.0"}</code></pre>
+</div>
+
+<div class="card" data-cat="JavaScript">
+    <span class="lang-tag">JavaScript</span>
+    <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+    <h3>Performance Debounce</h3>
+    <pre class="language-javascript"><code>const debounce = (func, delay) => {
+  let timer;
+  return (...args) => {
+    clearTimeout(timer);
+    timer = setTimeout(() => func.apply(this, args), delay);
+  };
+};</code></pre>
+</div>
+
+<div class="card web-card" data-cat="Web">
+    <span class="lang-tag">Web</span>
+    <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+    <h3>Animated Gradient Text</h3>
+    <div class="demo-box">
+        <h2 style="background: linear-gradient(90deg, #00d4ff, #00ff88, #00d4ff); background-size: 200% auto; -webkit-background-clip: text; -webkit-text-fill-color: transparent; animation: shine 3s linear infinite; margin: 0; font-family: sans-serif; font-size: 2rem;">CODE AVAIL</h2>
+        <style> @keyframes shine { to { background-position: 200% center; } } </style>
+    </div>
+    <pre class="language-css"><code>.gradient-text {
+  background: linear-gradient(90deg, #00d4ff, #00ff88);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-size: 200% auto;
+  animation: shine 3s linear infinite;
+}</code></pre>
+</div>
+
+<div class="card" data-cat="JavaScript">
+    <span class="lang-tag">JavaScript</span>
+    <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+    <h3>Modern Clipboard API</h3>
+    <pre class="language-javascript"><code>async function copyToClipboard(text) {
+  try {
+    await navigator.clipboard.writeText(text);
+    console.log('Text copied to clipboard');
+  } catch (err) {
+    console.error('Failed to copy: ', err);
+  }
+}</code></pre>
+</div>
+
+<div class="card" data-cat="Python">
+    <span class="lang-tag">Python</span>
+    <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+    <h3>List Filter Logic</h3>
+    <pre class="language-python"><code>data = [12, 45, 7, 89, 23, 5]
+# Keep numbers greater than 10
+filtered = [n for n in data if n > 10]
+print(f"Clean Data: {filtered}")</code></pre>
+</div>
+
         <div class="card" data-cat="JavaScript">
             <span class="lang-tag">JavaScript</span>
             <button class="copy-btn" onclick="copyCode(this)">Copy</button>
@@ -229,9 +258,29 @@ const timer = setInterval(() => {
         <div class="card web-card" data-cat="Web">
             <span class="lang-tag">Web</span>
             <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+            <h3>Neon Scrollbar Style</h3>
+            <div class="demo-box" style="overflow-y: scroll; border: 1px solid #2d333b; padding: 15px; text-align: left;">
+                <div style="height: 400px; color: #545d68; font-family: monospace; font-size: 0.85rem; line-height: 1.8;">
+                    <p style="color: var(--accent);">// SCROLL TEST AREA</p>
+                    <p>• Engineered for dark interfaces.</p>
+                    <p style="margin-top: 50px;">Scroll down to see effect...</p>
+                    <p style="margin-top: 100px; color: var(--accent);">[ MISSION ACCOMPLISHED ]</p>
+                </div>
+            </div>
+            <pre class="language-css"><code>::-webkit-scrollbar { width: 8px; }
+::-webkit-scrollbar-track { background: #0b0e14; }
+::-webkit-scrollbar-thumb { 
+  background: var(--accent); 
+  border-radius: 10px; 
+}</code></pre>
+        </div>
+
+        <div class="card web-card" data-cat="Web">
+            <span class="lang-tag">Web</span>
+            <button class="copy-btn" onclick="copyCode(this)">Copy</button>
             <h3>Infinite Border Glow</h3>
             <div class="demo-box">
-                <div class="glow-border" style="padding: 10px 20px; border-radius: 8px; color: var(--accent); font-weight: bold; background: #1c2128; border: 2px solid var(--accent); box-shadow: 0 0 10px var(--accent); animation: breathe 2s infinite alternate;">
+                <div style="padding: 10px 20px; border-radius: 8px; color: var(--accent); font-weight: bold; background: #1c2128; border: 2px solid var(--accent); box-shadow: 0 0 10px var(--accent); animation: breathe 2s infinite alternate;">
                     LIVE PREVIEW
                 </div>
             </div>
@@ -239,36 +288,21 @@ const timer = setInterval(() => {
   border: 2px solid var(--accent);
   box-shadow: 0 0 10px var(--accent);
   animation: breathe 2s infinite alternate;
-}
-@keyframes breathe { 
-  from { opacity: 0.5; } to { opacity: 1; } 
 }</code></pre>
         </div>
-    </div>
 
-    <div class="card web-card" data-cat="Web">
+        <div class="card web-card" data-cat="Web">
             <span class="lang-tag">Web</span>
             <button class="copy-btn" onclick="copyCode(this)">Copy</button>
             <h3>Matrix Dots Preloader</h3>
             <div class="demo-box">
                 <div style="display: grid; grid-template-columns: repeat(3, 15px); gap: 8px;">
-                    <div class="dot-pulse" style="width:12px; height:12px; background:var(--accent); border-radius:50%; animation: pulse-grid 1.2s infinite ease-in-out;"></div>
-                    <div class="dot-pulse" style="width:12px; height:12px; background:var(--accent); border-radius:50%; animation: pulse-grid 1.2s infinite ease-in-out 0.2s;"></div>
-                    <div class="dot-pulse" style="width:12px; height:12px; background:var(--accent); border-radius:50%; animation: pulse-grid 1.2s infinite ease-in-out 0.4s;"></div>
+                    <div style="width:12px; height:12px; background:var(--accent); border-radius:50%; animation: pulse-grid 1.2s infinite ease-in-out;"></div>
+                    <div style="width:12px; height:12px; background:var(--accent); border-radius:50%; animation: pulse-grid 1.2s infinite ease-in-out 0.2s;"></div>
+                    <div style="width:12px; height:12px; background:var(--accent); border-radius:50%; animation: pulse-grid 1.2s infinite ease-in-out 0.4s;"></div>
                 </div>
-                <style>
-                    @keyframes pulse-grid {
-                        0%, 100% { transform: scale(1); opacity: 1; }
-                        50% { transform: scale(0.3); opacity: 0.3; }
-                    }
-                </style>
             </div>
-            <pre class="language-css"><code>/* HTML: <div class="grid"><div></div><div></div><div></div></div> */
-.grid { display: flex; gap: 10px; }
-.grid div {
-  width: 15px; height: 15px;
-  background: var(--accent);
-  border-radius: 50%;
+            <pre class="language-css"><code>.grid div {
   animation: pulse 1.2s infinite ease-in-out;
 }
 @keyframes pulse {
@@ -277,7 +311,25 @@ const timer = setInterval(() => {
 }</code></pre>
         </div>
 
-    <div class="contribute-box">
+        <div class="card web-card" data-cat="Web">
+            <span class="lang-tag">Web</span>
+            <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+            <h3>Glassmorphism Login UI</h3>
+            <div class="demo-box">
+                <div style="background: rgba(255, 255, 255, 0.1); backdrop-filter: blur(10px); padding: 20px; border-radius: 15px; border: 1px solid rgba(255,255,255,0.2); width: 150px; text-align: center;">
+                    <div style="width: 30px; height: 30px; background: var(--accent); border-radius: 50%; margin: 0 auto 10px;"></div>
+                    <div style="height: 8px; background: rgba(255,255,255,0.2); margin-bottom: 5px;"></div>
+                    <div style="height: 8px; background: rgba(255,255,255,0.2); width: 60%; margin: 0 auto;"></div>
+                </div>
+            </div>
+            <pre class="language-css"><code>.glass-card {
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 16px;
+}</code></pre>
+        </div>
+    </div> <div class="contribute-box">
         <h2 style="color:white; margin-bottom:10px;">Submit Snippet</h2>
         <form action="https://formspree.io/f/xkovndyj" method="POST">
             <input type="text" name="title" class="form-input" placeholder="Snippet Title" required><br>
@@ -302,7 +354,7 @@ const timer = setInterval(() => {
     function setCategory(cat) {
         activeCategory = cat;
         document.querySelectorAll('.tab-btn').forEach(btn => {
-            btn.classList.toggle('active', btn.innerText.includes(cat) || (cat === 'all' && btn.innerText === 'All Library'));
+            btn.classList.toggle('active', btn.innerText.toLowerCase().includes(cat.toLowerCase()) || (cat === 'all' && btn.innerText.includes('All')));
         });
         applyFilters();
     }
@@ -324,27 +376,18 @@ const timer = setInterval(() => {
         btn.innerText = 'Copied!';
         setTimeout(() => btn.innerText = 'Copy', 2000);
     }
-    // --- Theme Toggle Logic ---
-const toggleBtn = document.getElementById('themeToggle');
-let isLight = false;
 
-toggleBtn.addEventListener('click', () => {
-    isLight = !isLight;
-    if (isLight) {
-        document.documentElement.style.setProperty('--bg', '#ffffff');
-        document.documentElement.style.setProperty('--card', '#f6f8fa');
-        document.documentElement.style.setProperty('--border', '#d0d7de');
-        document.body.style.color = '#24292f';
-        toggleBtn.innerText = '[ DARK_MODE ]';
-    } else {
-        document.documentElement.style.setProperty('--bg', '#0b0e14');
-        document.documentElement.style.setProperty('--card', '#151921');
-        document.documentElement.style.setProperty('--border', '#2d333b');
-        document.body.style.color = '#adbac7';
-        toggleBtn.innerText = '[ LIGHT_MODE ]';
-    }
-});
+    const toggleBtn = document.getElementById('themeToggle');
+    let isLight = false;
 
+    toggleBtn.addEventListener('click', () => {
+        isLight = !isLight;
+        document.documentElement.style.setProperty('--bg', isLight ? '#ffffff' : '#0b0e14');
+        document.documentElement.style.setProperty('--card', isLight ? '#f6f8fa' : '#151921');
+        document.documentElement.style.setProperty('--border', isLight ? '#d0d7de' : '#2d333b');
+        document.body.style.color = isLight ? '#24292f' : '#adbac7';
+        toggleBtn.innerText = isLight ? '[ DARK_MODE ]' : '[ LIGHT_MODE ]';
+    });
 </script>
 </body>
 </html>
