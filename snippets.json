@@ -1,0 +1,79 @@
+[
+  {
+    "id": 1,
+    "title": "Image Metadata Extractor",
+    "category": "Python",
+    "language": "python",
+    "code": "from PIL import Image\nfrom PIL.ExifTags import TAGS\nimg = Image.open('photo.jpg')\ninfo = {TAGS.get(k): v for k, v in img._getexif().items()}\nprint(info)"
+  },
+  {
+    
+  "id": 2,
+  "title": "Neon Glow Button",
+  "category": "Web",
+  "language": "css",
+  "isWeb": true,
+  "demo": "<button style='padding: 10px 20px; background: none; border: 2px solid #00d4ff; color: #00d4ff; border-radius: 5px; box-shadow: 0 0 10px #00d4ff; cursor: pointer; font-weight: bold;'>GLOW</button>",
+  "code": ".neon-btn {\n  border: 2px solid var(--accent);\n  color: var(--accent);\n  box-shadow: 0 0 15px var(--accent);\n}"
+},
+  {
+    "id": 3,
+    "title": "Modern Clipboard API",
+    "category": "JavaScript",
+    "language": "javascript",
+    "code": "async function copyToClipboard(text) {\n  await navigator.clipboard.writeText(text);\n}"
+  },
+  {
+    "id": 4,
+    "title": "AI Background Remover",
+    "category": "Python",
+    "language": "python",
+    "code": "from rembg import remove\nfrom PIL import Image\noutput = remove(Image.open('input.png'))"
+  },
+  {
+    "id": 5,
+    "title": "Matrix Dots Loader",
+    "category": "Web",
+    "language": "css",
+    "isWeb": true,
+    "demo": "<div style='display: flex; gap: 5px;'><div style='width:10px; height:10px; background:#00d4ff; border-radius:50%; animation: pulse 0.6s infinite alternate;'></div><div style='width:10px; height:10px; background:#00d4ff; border-radius:50%; animation: pulse 0.6s infinite alternate 0.2s;'></div></div>",
+    "code": "@keyframes pulse { from { opacity: 1; } to { opacity: 0.3; } }"
+  },
+  {
+    "id": 6,
+    "title": "Search Debounce",
+    "category": "JavaScript",
+    "language": "javascript",
+    "code": "const debounce = (func, delay) => {\n  let timer;\n  return (...args) => {\n    clearTimeout(timer);\n    timer = setTimeout(() => func(...args), delay);\n  };\n};"
+  },
+  {
+    "id": 7,
+    "title": "FastAPI Minimal Server",
+    "category": "Python",
+    "language": "python",
+    "code": "from fastapi import FastAPI\napp = FastAPI()\n@app.get(\"/\")\ndef home(): return {\"status\": \"online\"}"
+  },
+  {
+    "id": 8,
+    "title": "Glassmorphism UI",
+    "category": "Web",
+    "language": "css",
+    "isWeb": true,
+    "demo": "<div style='background: rgba(255,255,255,0.1); backdrop-filter: blur(10px); padding: 20px; border-radius: 10px; border: 1px solid rgba(255,255,255,0.2); color: white;'>Glass</div>",
+    "code": ".glass {\n  background: rgba(255, 255, 255, 0.1);\n  backdrop-filter: blur(10px);\n}"
+  },
+  {
+    "id": 9,
+    "title": "Theme Persistence",
+    "category": "JavaScript",
+    "language": "javascript",
+    "code": "const saveTheme = (theme) => localStorage.setItem('theme', theme);"
+  },
+  {
+    "id": 10,
+    "title": "URL Shortener",
+    "category": "Python",
+    "language": "python",
+    "code": "import pyshorteners\ns = pyshorteners.Shortener()\nprint(s.tinyurl.short('https://google.com'))"
+  }
+]
