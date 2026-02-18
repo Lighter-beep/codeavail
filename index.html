@@ -4,390 +4,157 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>CodeAvail | Premium Dev Library</title>
-    <meta name="description" content="Explore CodeAvail's curated library of high-performance Python, JavaScript, and HTML/CSS snippets for modern developers.">
+    <meta name="description" content="Explore CodeAvail's curated library of high-performance Python, JavaScript, and HTML/CSS snippets.">
+
+    <link rel="icon" type="image/png" href="ping.png">
     
-    <link rel="icon" type="image/png" href="favicon.png.png">
-    <meta property="og:image" content="favicon.png.png">
-
-    <style>
-        :root { --accent: #00d4ff; --bg: #0b0e14; --card: #151921; --border: #2d333b; }
-        body { background: var(--bg); color: #adbac7; font-family: 'Segoe UI', sans-serif; margin: 0; line-height: 1.6; transition: background 0.3s, color 0.3s; }
-        .container { max-width: 900px; margin: 0 auto; padding: 20px; }
-
-        header { text-align: center; padding: 40px 0; }
-        .terminal-loader {
-            background: rgba(0, 0, 0, 0.3);
-            border: 1px solid var(--border);
-            border-radius: 12px;
-            padding: 30px;
-            display: inline-block;
-            min-width: 350px;
-            backdrop-filter: blur(10px);
-            box-shadow: 0 10px 40px rgba(0,0,0,0.5);
-            position: relative;
-        }
-        .terminal-header { display: flex; gap: 6px; margin-bottom: 10px; }
-        .dot { width: 10px; height: 10px; border-radius: 50%; }
-        .red { background: #ff5f56; } .yellow { background: #ffbd2e; } .green { background: #27c93f; }
-        
-        h1 { font-size: 4rem; margin: 10px 0; color: var(--accent); font-weight: 900; letter-spacing: -2px; }
-
-        .status-container { display: flex; align-items: center; justify-content: center; gap: 10px; }
-        .ping { width: 8px; height: 8px; background: #00ff88; border-radius: 50%; position: relative; }
-        .ping::after { content: ''; position: absolute; width: 100%; height: 100%; background: #00ff88; border-radius: 50%; animation: pulse 1.5s infinite; }
-        @keyframes pulse { 0% { transform: scale(1); opacity: 0.8; } 100% { transform: scale(3); opacity: 0; } }
-        .status-text { font-size: 0.75rem; color: #768390; text-transform: uppercase; letter-spacing: 2px; }
-
-        .nav-container { position: sticky; top: 0; background: var(--bg); z-index: 1000; padding: 20px 0; border-bottom: 1px solid var(--border); }
-        #searchBar { width: 100%; padding: 16px; border-radius: 12px; border: 1px solid var(--border); background: #1c2128; color: white; margin-bottom: 20px; box-sizing: border-box; outline: none; transition: 0.3s; }
-        #searchBar:focus { border-color: var(--accent); box-shadow: 0 0 15px rgba(0, 212, 255, 0.1); }
-        .tabs { display: flex; gap: 12px; overflow-x: auto; scrollbar-width: none; }
-        .tabs::-webkit-scrollbar { display: none; }
-        .tab-btn { background: var(--card); border: 1px solid var(--border); color: #768390; padding: 10px 24px; border-radius: 30px; cursor: pointer; font-weight: 600; transition: 0.3s; white-space: nowrap; }
-        .tab-btn.active { border-color: var(--accent); color: var(--accent); background: rgba(0, 212, 255, 0.1); }
-
-        .card { background: var(--card); border: 1px solid var(--border); border-radius: 20px; padding: 30px; margin-top: 30px; position: relative; transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275); }
-        .card:hover { transform: translateY(-10px); border-color: var(--accent); box-shadow: 0 20px 40px rgba(0,0,0,0.4); }
-
-        .card.web-card .demo-box { display: none; height: 150px; align-items: center; justify-content: center; background: #0d1117; border-radius: 12px; margin-bottom: 15px; }
-        .card.web-card:hover .demo-box { display: flex; }
-        .card.web-card:hover pre { display: none; }
-        .card.web-card::after { content: "Hover to Preview Live"; position: absolute; bottom: 15px; right: 30px; font-size: 0.65rem; color: #545d68; text-transform: uppercase; letter-spacing: 1px; opacity: 0.8; }
-        .card.web-card:hover::after { display: none; }
-
-        .lang-tag { font-size: 0.7rem; color: var(--accent); border: 1px solid var(--accent); padding: 3px 10px; border-radius: 6px; text-transform: uppercase; font-weight: bold; }
-        h3 { margin: 20px 0 12px; color: #f0f6fc; font-size: 1.4rem; }
-        pre { 
-    border-radius: 12px !important; 
-    background: var(--card) !important; 
-    padding: 1.5rem !important; 
-    overflow-x: auto; 
-    border: 1px solid var(--border); 
-}
-        .copy-btn { position: absolute; right: 30px; top: 35px; background: var(--accent); color: #000; border: none; padding: 6px 14px; border-radius: 8px; cursor: pointer; font-weight: bold; }
-
-        .contribute-box { margin-top: 80px; padding: 40px; border: 1px solid var(--border); border-radius: 24px; background: linear-gradient(145deg, #151921, #0b0e14); text-align: center; }
-        .form-input { width: 100%; max-width: 500px; padding: 14px; background: #0b0e14; border: 1px solid var(--border); border-radius: 10px; color: white; margin-bottom: 15px; outline: none; box-sizing: border-box; }
-        .btn-submit { background: var(--accent); color: black; border: none; padding: 14px 40px; border-radius: 30px; font-weight: bold; cursor: pointer; }
-
-        footer { text-align: center; padding: 60px 0; color: #545d68; border-top: 1px solid var(--border); margin-top: 80px; }
-
-        @keyframes pulse-grid { 0%, 100% { transform: scale(1); opacity: 1; } 50% { transform: scale(0.3); opacity: 0.3; } }
-        @keyframes breathe { from { opacity: 0.5; } to { opacity: 1; } }
-    </style>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism-tomorrow.min.css" rel="stylesheet"/>
+    
+    <link rel="stylesheet" href="style.css">
 </head>
+
 <body>
+    <div class="container">
 
-<div class="container">
-    <header>
-        <div class="terminal-loader">
-            <div class="terminal-header">
-                <div class="dot red"></div>
-                <div class="dot yellow"></div>
-                <div class="dot green"></div>
+        <header>
+            <div class="terminal-loader">
+                <img src="ping.png" alt="CodeAvail Logo" class="logo-img">
+                <button id="themeToggle" aria-label="Toggle Theme">[ LIGHT_MODE ]</button>
+                <h1>CodeAvail</h1>
             </div>
-            <img src="favicon.png.png" alt="Logo" class="logo-img" style="width:120px; height:120px; margin-bottom:15px; border-radius: 25px; box-shadow: 0 0 40px rgba(0, 212, 255, 0.25);">
-            <button id="themeToggle" style="position: absolute; top: 15px; right: 15px; background: none; border: 1px solid var(--border); color: var(--accent); cursor: pointer; border-radius: 8px; padding: 5px 10px; font-size: 0.6rem; font-family: monospace; z-index: 10;">
-                [ LIGHT_MODE ]
-            </button>
-            <h1>CodeAvail</h1>
-            <div class="status-container">
-                <div class="ping"></div>
-                <span class="status-text">System Status: Operational • v2.0 Live</span>
+        </header>
+
+        <div class="nav-container">
+            <input type="text" id="searchBar" placeholder="Search snippets..." aria-label="Search Snippets">
+            <div class="tabs">
+                <button class="tab-btn active" data-cat="all">All Library</button>
+                <button class="tab-btn" data-cat="Python">Python</button>
+                <button class="tab-btn" data-cat="JavaScript">JavaScript</button>
+                <button class="tab-btn" data-cat="Web">HTML/CSS</button>
             </div>
-        </div>
-    </header>
-
-    <div class="nav-container">
-        <input type="text" id="searchBar" placeholder="Search snippets..." onkeyup="runFilter()">
-        <div class="tabs">
-            <button class="tab-btn active" onclick="setCategory('all')">All Library</button>
-            <button class="tab-btn" onclick="setCategory('Python')">Python</button>
-            <button class="tab-btn" onclick="setCategory('JavaScript')">JavaScript</button>
-            <button class="tab-btn" onclick="setCategory('Web')">HTML/CSS</button>
-        </div>
-    </div>
-
-    <div id="snippetList">
-        <div class="card" data-cat="Python">
-            <span class="lang-tag">Python</span>
-            <button class="copy-btn" onclick="copyCode(this)">Copy</button>
-            <h3>Secure Password Generator</h3>
-            <pre class="language-python"><code>import random, string
-chars = string.ascii_letters + string.digits + "!"
-pwd = "".join(random.sample(chars, 12))
-print(f"Your Password: {pwd}")</code></pre>
-        </div>
-
-        <div class="card" data-cat="Python">
-            <span class="lang-tag">Python</span>
-            <button class="copy-btn" onclick="copyCode(this)">Copy</button>
-            <h3>Image Metadata Extractor</h3>
-            <pre class="language-python"><code>from PIL import Image
+        </div><div class="card" data-cat="Python">
+    <button class="copy-btn">Copy</button>
+    <h3>Image Metadata Extractor</h3>
+    <pre><code class="language-python">from PIL import Image
 from PIL.ExifTags import TAGS
 img = Image.open('photo.jpg')
-info = {TAGS.get(k): v for k, v in img._getexif().items()}</code></pre>
-        </div>
-
-        <div class="card" data-cat="Python">
-            <span class="lang-tag">Python</span>
-            <button class="copy-btn" onclick="copyCode(this)">Copy</button>
-            <h3>Remove Background from Image</h3>
-            <pre class="language-python"><code>from rembg import remove
-from PIL import Image
-input = Image.open('input.png')
-output = remove(input)
-output.save('output.png')</code></pre>
-        </div>
-
-        <div class="card" data-cat="Python">
-            <span class="lang-tag">Python</span>
-            <button class="copy-btn" onclick="copyCode(this)">Copy</button>
-            <h3>URL Shortener Logic</h3>
-            <pre class="language-python"><code>import pyshorteners
-s = pyshorteners.Shortener()
-print(s.tinyurl.short('https://github.com/'))</code></pre>
-        </div>
-
-        <div class="card" data-cat="JavaScript">
-            <span class="lang-tag">JavaScript</span>
-            <button class="copy-btn" onclick="copyCode(this)">Copy</button>
-            <h3>Smooth Scroll to Top</h3>
-            <pre class="language-javascript"><code>const scrollToTop = () => {
-  window.scrollTo({ top: 0, behavior: 'smooth' });
-};</code></pre>
-        </div>
-
-        <div class="card" data-cat="JavaScript">
-            <span class="lang-tag">JavaScript</span>
-            <button class="copy-btn" onclick="copyCode(this)">Copy</button>
-            <h3>Secure API Data Fetch</h3>
-            <pre class="language-javascript"><code>const getData = async (url) => {
-    const res = await fetch(url);
-    return await res.json();
-};</code></pre>
-        </div>
-
-        <div class="card" data-cat="JavaScript">
-            <span class="lang-tag">JavaScript</span>
-            <button class="copy-btn" onclick="copyCode(this)">Copy</button>
-            <h3>Local Storage Theme Switcher</h3>
-            <pre class="language-javascript"><code>const toggleTheme = () => {
-  const isDark = document.body.classList.toggle('dark-mode');
-  localStorage.setItem('theme', isDark ? 'dark' : 'light');
-};</code></pre>
-        </div>
-
-        <div class="card" data-cat="Python">
-    <span class="lang-tag">Python</span>
-    <button class="copy-btn" onclick="copyCode(this)">Copy</button>
-    <h3>FastAPI Minimal Server</h3>
-    <pre class="language-python"><code>from fastapi import FastAPI
-app = FastAPI()
-
-@app.get("/")
-def read_root():
-    return {"status": "active", "version": "1.0.0"}</code></pre>
-</div>
-
-<div class="card" data-cat="JavaScript">
-    <span class="lang-tag">JavaScript</span>
-    <button class="copy-btn" onclick="copyCode(this)">Copy</button>
-    <h3>Performance Debounce</h3>
-    <pre class="language-javascript"><code>const debounce = (func, delay) => {
-  let timer;
-  return (...args) => {
-    clearTimeout(timer);
-    timer = setTimeout(() => func.apply(this, args), delay);
-  };
-};</code></pre>
+info = {TAGS.get(k): v for k, v in img._getexif().items()}
+print(info)</code></pre>
 </div>
 
 <div class="card web-card" data-cat="Web">
-    <span class="lang-tag">Web</span>
-    <button class="copy-btn" onclick="copyCode(this)">Copy</button>
-    <h3>Animated Gradient Text</h3>
+    <button class="copy-btn">Copy</button>
+    <h3>Neon Glow Button</h3>
     <div class="demo-box">
-        <h2 style="background: linear-gradient(90deg, #00d4ff, #00ff88, #00d4ff); background-size: 200% auto; -webkit-background-clip: text; -webkit-text-fill-color: transparent; animation: shine 3s linear infinite; margin: 0; font-family: sans-serif; font-size: 2rem;">CODE AVAIL</h2>
-        <style> @keyframes shine { to { background-position: 200% center; } } </style>
+        <button style="padding: 10px 20px; background: none; border: 2px solid #00d4ff; color: #00d4ff; border-radius: 5px; box-shadow: 0 0 10px #00d4ff; cursor: pointer; font-weight: bold;">GLOW</button>
     </div>
-    <pre class="language-css"><code>.gradient-text {
-  background: linear-gradient(90deg, #00d4ff, #00ff88);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-size: 200% auto;
-  animation: shine 3s linear infinite;
+    <pre><code class="language-css">.neon-btn {
+  border: 2px solid var(--accent);
+  color: var(--accent);
+  box-shadow: 0 0 15px var(--accent);
+  background: transparent;
+  transition: 0.3s;
 }</code></pre>
 </div>
 
 <div class="card" data-cat="JavaScript">
-    <span class="lang-tag">JavaScript</span>
-    <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+    <button class="copy-btn">Copy</button>
     <h3>Modern Clipboard API</h3>
-    <pre class="language-javascript"><code>async function copyToClipboard(text) {
+    <pre><code class="language-javascript">async function copyToClipboard(text) {
   try {
     await navigator.clipboard.writeText(text);
-    console.log('Text copied to clipboard');
+    console.log('Copied!');
   } catch (err) {
-    console.error('Failed to copy: ', err);
+    console.error('Failed', err);
   }
 }</code></pre>
 </div>
 
 <div class="card" data-cat="Python">
-    <span class="lang-tag">Python</span>
-    <button class="copy-btn" onclick="copyCode(this)">Copy</button>
-    <h3>List Filter Logic</h3>
-    <pre class="language-python"><code>data = [12, 45, 7, 89, 23, 5]
-# Keep numbers greater than 10
-filtered = [n for n in data if n > 10]
-print(f"Clean Data: {filtered}")</code></pre>
+    <button class="copy-btn">Copy</button>
+    <h3>AI Background Remover</h3>
+    <pre><code class="language-python">from rembg import remove
+from PIL import Image
+input_img = Image.open('input.png')
+output = remove(input_img)
+output.save('no-bg.png')</code></pre>
 </div>
 
-        <div class="card" data-cat="JavaScript">
-            <span class="lang-tag">JavaScript</span>
-            <button class="copy-btn" onclick="copyCode(this)">Copy</button>
-            <h3>Countdown Timer</h3>
-            <pre class="language-javascript"><code>let time = 60;
-const timer = setInterval(() => {
-  if (time <= 0) clearInterval(timer);
-  console.log(time--);
-}, 1000);</code></pre>
+<div class="card web-card" data-cat="Web">
+    <button class="copy-btn">Copy</button>
+    <h3>Matrix Dots Loader</h3>
+    <div class="demo-box">
+        <div style="display: flex; gap: 5px;">
+            <div style="width:10px; height:10px; background:#00d4ff; border-radius:50%; animation: pulse 0.6s infinite alternate;"></div>
+            <div style="width:10px; height:10px; background:#00d4ff; border-radius:50%; animation: pulse 0.6s infinite alternate 0.2s;"></div>
+            <div style="width:10px; height:10px; background:#00d4ff; border-radius:50%; animation: pulse 0.6s infinite alternate 0.4s;"></div>
         </div>
-
-        <div class="card web-card" data-cat="Web">
-            <span class="lang-tag">Web</span>
-            <button class="copy-btn" onclick="copyCode(this)">Copy</button>
-            <h3>Neon Scrollbar Style</h3>
-            <div class="demo-box" style="overflow-y: scroll; border: 1px solid #2d333b; padding: 15px; text-align: left;">
-                <div style="height: 400px; color: #545d68; font-family: monospace; font-size: 0.85rem; line-height: 1.8;">
-                    <p style="color: var(--accent);">// SCROLL TEST AREA</p>
-                    <p>• Engineered for dark interfaces.</p>
-                    <p style="margin-top: 50px;">Scroll down to see effect...</p>
-                    <p style="margin-top: 100px; color: var(--accent);">[ MISSION ACCOMPLISHED ]</p>
-                </div>
-            </div>
-            <pre class="language-css"><code>::-webkit-scrollbar { width: 8px; }
-::-webkit-scrollbar-track { background: #0b0e14; }
-::-webkit-scrollbar-thumb { 
-  background: var(--accent); 
-  border-radius: 10px; 
-}</code></pre>
-        </div>
-
-        <div class="card web-card" data-cat="Web">
-            <span class="lang-tag">Web</span>
-            <button class="copy-btn" onclick="copyCode(this)">Copy</button>
-            <h3>Infinite Border Glow</h3>
-            <div class="demo-box">
-                <div style="padding: 10px 20px; border-radius: 8px; color: var(--accent); font-weight: bold; background: #1c2128; border: 2px solid var(--accent); box-shadow: 0 0 10px var(--accent); animation: breathe 2s infinite alternate;">
-                    LIVE PREVIEW
-                </div>
-            </div>
-            <pre class="language-css"><code>.glow-border {
-  border: 2px solid var(--accent);
-  box-shadow: 0 0 10px var(--accent);
-  animation: breathe 2s infinite alternate;
-}</code></pre>
-        </div>
-
-        <div class="card web-card" data-cat="Web">
-            <span class="lang-tag">Web</span>
-            <button class="copy-btn" onclick="copyCode(this)">Copy</button>
-            <h3>Matrix Dots Preloader</h3>
-            <div class="demo-box">
-                <div style="display: grid; grid-template-columns: repeat(3, 15px); gap: 8px;">
-                    <div style="width:12px; height:12px; background:var(--accent); border-radius:50%; animation: pulse-grid 1.2s infinite ease-in-out;"></div>
-                    <div style="width:12px; height:12px; background:var(--accent); border-radius:50%; animation: pulse-grid 1.2s infinite ease-in-out 0.2s;"></div>
-                    <div style="width:12px; height:12px; background:var(--accent); border-radius:50%; animation: pulse-grid 1.2s infinite ease-in-out 0.4s;"></div>
-                </div>
-            </div>
-            <pre class="language-css"><code>.grid div {
-  animation: pulse 1.2s infinite ease-in-out;
-}
+        <style>@keyframes pulse { from { opacity: 1; transform: scale(1); } to { opacity: 0.3; transform: scale(0.8); } }</style>
+    </div>
+    <pre><code class="language-css">.dot { animation: pulse 0.6s infinite alternate; }
 @keyframes pulse {
-  0%, 100% { transform: scale(1); opacity: 1; }
-  50% { transform: scale(0.3); opacity: 0.3; }
+  from { opacity: 1; }
+  to { opacity: 0.3; }
 }</code></pre>
-        </div>
+</div>
 
-        <div class="card web-card" data-cat="Web">
-            <span class="lang-tag">Web</span>
-            <button class="copy-btn" onclick="copyCode(this)">Copy</button>
-            <h3>Glassmorphism Login UI</h3>
-            <div class="demo-box">
-                <div style="background: rgba(255, 255, 255, 0.1); backdrop-filter: blur(10px); padding: 20px; border-radius: 15px; border: 1px solid rgba(255,255,255,0.2); width: 150px; text-align: center;">
-                    <div style="width: 30px; height: 30px; background: var(--accent); border-radius: 50%; margin: 0 auto 10px;"></div>
-                    <div style="height: 8px; background: rgba(255,255,255,0.2); margin-bottom: 5px;"></div>
-                    <div style="height: 8px; background: rgba(255,255,255,0.2); width: 60%; margin: 0 auto;"></div>
-                </div>
-            </div>
-            <pre class="language-css"><code>.glass-card {
+<div class="card" data-cat="JavaScript">
+    <button class="copy-btn">Copy</button>
+    <h3>Search Debounce</h3>
+    <pre><code class="language-javascript">const debounce = (func, delay) => {
+  let timer;
+  return (...args) => {
+    clearTimeout(timer);
+    timer = setTimeout(() => func(...args), delay);
+  };
+};</code></pre>
+</div>
+
+<div class="card" data-cat="Python">
+    <button class="copy-btn">Copy</button>
+    <h3>FastAPI Minimal Server</h3>
+    <pre><code class="language-python">from fastapi import FastAPI
+app = FastAPI()
+
+@app.get("/")
+def home():
+    return {"status": "online"}</code></pre>
+</div>
+
+<div class="card web-card" data-cat="Web">
+    <button class="copy-btn">Copy</button>
+    <h3>Glassmorphism UI</h3>
+    <div class="demo-box">
+        <div style="background: rgba(255,255,255,0.1); backdrop-filter: blur(10px); padding: 20px; border-radius: 10px; border: 1px solid rgba(255,255,255,0.2); color: white;">Glass</div>
+    </div>
+    <pre><code class="language-css">.glass {
   background: rgba(255, 255, 255, 0.1);
   backdrop-filter: blur(10px);
-  border: 1px solid rgba(255, 255, 255, 0.2);
-  border-radius: 16px;
+  border: 1px solid rgba(255,255,255,0.2);
 }</code></pre>
-        </div>
-    </div> <div class="contribute-box">
-        <h2 style="color:white; margin-bottom:10px;">Submit Snippet</h2>
-        <form action="https://formspree.io/f/xkovndyj" method="POST">
-            <input type="text" name="title" class="form-input" placeholder="Snippet Title" required><br>
-            <textarea name="code" class="form-input" placeholder="Paste Code Here..." rows="5" required></textarea><br>
-            <button type="submit" class="btn-submit">Transmit to Server</button>
-        </form>
-    </div>
-
-    <footer>
-        &copy; 2026 CodeAvail &bull; Engineered by Maheen Touseef
-    </footer>
 </div>
 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-python.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-javascript.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-css.min.js"></script>
+<div class="card" data-cat="JavaScript">
+    <button class="copy-btn">Copy</button>
+    <h3>Theme Persistence</h3>
+    <pre><code class="language-javascript">const saveTheme = (theme) => {
+  localStorage.setItem('user-theme', theme);
+};
+const getTheme = () => localStorage.getItem('user-theme');</code></pre>
+</div>
 
-<script>
-    let activeCategory = 'all';
+<div class="card" data-cat="Python">
+    <button class="copy-btn">Copy</button>
+    <h3>Simple URL Shortener</h3>
+    <pre><code class="language-python">import pyshorteners
+s = pyshorteners.Shortener()
+print(s.tinyurl.short('https://google.com'))</code></pre>
+</div>
 
-    function setCategory(cat) {
-        activeCategory = cat;
-        document.querySelectorAll('.tab-btn').forEach(btn => {
-            btn.classList.toggle('active', btn.innerText.toLowerCase().includes(cat.toLowerCase()) || (cat === 'all' && btn.innerText.includes('All')));
-        });
-        applyFilters();
-    }
-
-    function applyFilters() {
-        const query = document.getElementById('searchBar').value.toLowerCase();
-        document.querySelectorAll('.card').forEach(card => {
-            const matchesCat = (activeCategory === 'all' || card.dataset.cat === activeCategory);
-            const matchesSearch = card.innerText.toLowerCase().includes(query);
-            card.style.display = (matchesCat && matchesSearch) ? 'block' : 'none';
-        });
-    }
-
-    function runFilter() { applyFilters(); }
-
-    function copyCode(btn) {
-        const code = btn.parentElement.querySelector('code').innerText;
-        navigator.clipboard.writeText(code);
-        btn.innerText = 'Copied!';
-        setTimeout(() => btn.innerText = 'Copy', 2000);
-    }
-
-    const toggleBtn = document.getElementById('themeToggle');
-    let isLight = false;
-
-    toggleBtn.addEventListener('click', () => {
-        isLight = !isLight;
-        document.documentElement.style.setProperty('--bg', isLight ? '#ffffff' : '#0b0e14');
-        document.documentElement.style.setProperty('--card', isLight ? '#f6f8fa' : '#151921');
-        document.documentElement.style.setProperty('--border', isLight ? '#d0d7de' : '#2d333b');
-        document.body.style.color = isLight ? '#24292f' : '#adbac7';
-        toggleBtn.innerText = isLight ? '[ DARK_MODE ]' : '[ LIGHT_MODE ]';
-    });
-</script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-python.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-javascript.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-css.min.js"></script>
+    <script src="script.js"></script>
 </body>
 </html>
