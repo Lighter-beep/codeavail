@@ -4,14 +4,29 @@ const tabBtns = document.querySelectorAll('.tab-btn');
 const themeToggle = document.getElementById('themeToggle');
 let allSnippets = [];
 
-// --- 1. Load Data from JSON ---
+// --- 1. Load Data & Control Loader ---
 fetch('snippets.json')
     .then(res => res.json())
     .then(data => {
         allSnippets = data;
         renderSnippets(allSnippets);
+        
+        // BOSS: Hiding the loader with a smooth fade
+        setTimeout(() => {
+            const loader = document.getElementById('loader-wrapper');
+            if(loader) {
+                loader.style.opacity = '0';
+                // Remove from layout after fade out
+                setTimeout(() => loader.style.display = 'none', 500);
+            }
+        }, 1500); 
     })
-    .catch(err => console.error("Boss, the JSON failed to load:", err));
+    .catch(err => {
+        console.error("Boss, we have a problem:", err);
+        const loader = document.getElementById('loader-wrapper');
+        // Corrected: Add .style here so the site isn't stuck on the loader if it fails
+        if(loader) loader.style.display = 'none'; 
+    });
 
 // --- 2. Render Snippets to UI ---
 function renderSnippets(snippets) {
@@ -25,7 +40,7 @@ function renderSnippets(snippets) {
         </div>
     `).join('');
     
-    // Highlight code after rendering
+    // Refresh syntax highlighting
     Prism.highlightAll();
 }
 
