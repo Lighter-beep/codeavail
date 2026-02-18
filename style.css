@@ -1,0 +1,154 @@
+:root {
+    --accent: #00d4ff;
+    --bg: #0b0e14;
+    --card: #151921;
+    --border: #2d333b;
+}
+
+body {
+    background: var(--bg);
+    color: #adbac7;
+    font-family: 'Segoe UI', sans-serif;
+    margin: 0;
+    line-height: 1.6;
+    transition: .3s;
+}
+
+.container { max-width: 900px; margin: auto; padding: 20px; }
+
+header { text-align: center; padding: 40px 0; }
+
+.terminal-loader {
+    background: rgba(0, 0, 0, .3);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 30px;
+    display: inline-block;
+    min-width: 350px;
+    position: relative;
+    backdrop-filter: blur(10px);
+    box-shadow: 0 10px 40px rgba(0, 0, 0, .5);
+}
+
+.logo-img {
+    width: 100px;
+    height: 100px;
+    border-radius: 20px;
+    margin-bottom: 15px;
+    box-shadow: 0 0 30px rgba(0, 212, 255, .25);
+    transition: .3s;
+}
+
+.logo-img:hover { transform: scale(1.05); }
+
+h1 {
+    font-size: 3.5rem;
+    color: var(--accent);
+    margin: 10px 0;
+    font-weight: 900;
+    letter-spacing: -1px;
+}
+
+.nav-container {
+    position: sticky;
+    top: 0;
+    background: var(--bg);
+    padding: 20px 0;
+    border-bottom: 1px solid var(--border);
+    z-index: 1000;
+}
+
+#searchBar {
+    width: 100%;
+    padding: 15px;
+    border-radius: 12px;
+    border: 1px solid var(--border);
+    background: #1c2128;
+    color: white;
+    margin-bottom: 20px;
+    box-sizing: border-box;
+    outline: none;
+}
+
+.tabs { display: flex; gap: 10px; overflow-x: auto; scrollbar-width: none; }
+.tabs::-webkit-scrollbar { display: none; } /* Added: Hides scrollbar on Chrome/Safari */
+
+.tab-btn {
+    background: var(--card);
+    border: 1px solid var(--border);
+    color: #768390;
+    padding: 10px 20px;
+    border-radius: 30px;
+    cursor: pointer;
+    font-weight: 600;
+    white-space: nowrap;
+}
+
+.tab-btn.active {
+    border-color: var(--accent);
+    color: var(--accent);
+    background: rgba(0, 212, 255, .1);
+}
+
+.card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 20px;
+    padding: 30px;
+    margin-top: 30px;
+    position: relative;
+    transition: .3s;
+}
+
+.card:hover {
+    transform: translateY(-8px);
+    border-color: var(--accent);
+}
+
+/* Added: This makes the code blocks match the Light/Dark theme */
+pre { 
+    border-radius: 12px !important; 
+    background: var(--card) !important; 
+    padding: 1.5rem !important; 
+    overflow-x: auto; 
+    border: 1px solid var(--border); 
+}
+
+.copy-btn {
+    position: absolute;
+    right: 30px;
+    top: 30px;
+    background: var(--accent);
+    color: black;
+    border: none;
+    padding: 6px 14px;
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+footer {
+    text-align: center;
+    padding: 60px 0;
+    color: #545d68;
+    border-top: 1px solid var(--border);
+    margin-top: 80px;
+}
+/* --- Web Card Hover Preview Logic --- */
+.card.web-card .demo-box { 
+    display: none; 
+    height: 150px; 
+    align-items: center; 
+    justify-content: center; 
+    background: #0d1117; 
+    border-radius: 12px; 
+    margin-bottom: 15px; 
+}
+
+.card.web-card:hover .demo-box { 
+    display: flex; 
+}
+
+.card.web-card:hover pre { 
+    display: none; 
+}
