@@ -6,7 +6,6 @@
     --text: #adbac7;
 }
 
-/* Added: Light Theme Overrides */
 body.light-theme {
     --bg: #f5f7f9;
     --card: #ffffff;
