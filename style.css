@@ -113,7 +113,7 @@ h1 {
     border-color: var(--accent);
 }
 
-/* Added: This makes the code blocks match the Light-Dark theme */
+/* Added : This makes the code blocks match the Light-Dark theme */
 pre { 
     border-radius: 12px !important; 
     background: var(--card) !important; 
