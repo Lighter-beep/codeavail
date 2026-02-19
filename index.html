@@ -4,21 +4,25 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>CodeAvail | Premium Dev Library</title>
-    <meta name="description" content="Explore CodeAvail's curated library of high-performance Python, JavaScript, and HTML/CSS snippets.">
-
-    <link rel="icon" type="image/png" href="ping.png">
+    
+    <link rel="icon" type="image/png" href="png.png">
     
     <link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism-tomorrow.min.css" rel="stylesheet"/>
-    
     <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
+    <div id="loader-wrapper">
+    <div class="loader-content">
+        <div class="scan-line"></div>
+        <div class="loading-text">LOADING</div>
+    </div>
+</div>
     <div class="container">
 
         <header>
             <div class="terminal-loader">
-                <img src="ping.png" alt="CodeAvail Logo" class="logo-img">
+                <img src="png.png" alt="CodeAvail Logo" class="logo-img">
                 <button id="themeToggle" aria-label="Toggle Theme">[ LIGHT_MODE ]</button>
                 <h1>CodeAvail</h1>
             </div>
@@ -32,124 +36,36 @@
                 <button class="tab-btn" data-cat="JavaScript">JavaScript</button>
                 <button class="tab-btn" data-cat="Web">HTML/CSS</button>
             </div>
-        </div><div class="card" data-cat="Python">
-    <button class="copy-btn">Copy</button>
-    <h3>Image Metadata Extractor</h3>
-    <pre><code class="language-python">from PIL import Image
-from PIL.ExifTags import TAGS
-img = Image.open('photo.jpg')
-info = {TAGS.get(k): v for k, v in img._getexif().items()}
-print(info)</code></pre>
-</div>
-
-<div class="card web-card" data-cat="Web">
-    <button class="copy-btn">Copy</button>
-    <h3>Neon Glow Button</h3>
-    <div class="demo-box">
-        <button style="padding: 10px 20px; background: none; border: 2px solid #00d4ff; color: #00d4ff; border-radius: 5px; box-shadow: 0 0 10px #00d4ff; cursor: pointer; font-weight: bold;">GLOW</button>
-    </div>
-    <pre><code class="language-css">.neon-btn {
-  border: 2px solid var(--accent);
-  color: var(--accent);
-  box-shadow: 0 0 15px var(--accent);
-  background: transparent;
-  transition: 0.3s;
-}</code></pre>
-</div>
-
-<div class="card" data-cat="JavaScript">
-    <button class="copy-btn">Copy</button>
-    <h3>Modern Clipboard API</h3>
-    <pre><code class="language-javascript">async function copyToClipboard(text) {
-  try {
-    await navigator.clipboard.writeText(text);
-    console.log('Copied!');
-  } catch (err) {
-    console.error('Failed', err);
-  }
-}</code></pre>
-</div>
-
-<div class="card" data-cat="Python">
-    <button class="copy-btn">Copy</button>
-    <h3>AI Background Remover</h3>
-    <pre><code class="language-python">from rembg import remove
-from PIL import Image
-input_img = Image.open('input.png')
-output = remove(input_img)
-output.save('no-bg.png')</code></pre>
-</div>
-
-<div class="card web-card" data-cat="Web">
-    <button class="copy-btn">Copy</button>
-    <h3>Matrix Dots Loader</h3>
-    <div class="demo-box">
-        <div style="display: flex; gap: 5px;">
-            <div style="width:10px; height:10px; background:#00d4ff; border-radius:50%; animation: pulse 0.6s infinite alternate;"></div>
-            <div style="width:10px; height:10px; background:#00d4ff; border-radius:50%; animation: pulse 0.6s infinite alternate 0.2s;"></div>
-            <div style="width:10px; height:10px; background:#00d4ff; border-radius:50%; animation: pulse 0.6s infinite alternate 0.4s;"></div>
         </div>
-        <style>@keyframes pulse { from { opacity: 1; transform: scale(1); } to { opacity: 0.3; transform: scale(0.8); } }</style>
+
+        <div id="snippetList">
+          
+        </div>
+
+        <div class="card" style="border-style: dashed; border-color: var(--accent); margin-top: 50px;">
+            <span class="lang-tag">Community</span>
+            <h3>Submit a Snippet</h3>
+            <p>Contribute your logic to the CodeAvail library.</p>
+            
+            <form action="https://formspree.io/f/xkovndyj" method="POST" style="display: flex; flex-direction: column; gap: 15px; margin-top: 20px;">
+                <input type="text" name="title" placeholder="Snippet Title" required 
+                    style="padding: 12px; background: #1c2128; border: 1px solid var(--border); color: white; border-radius: 8px;">
+                
+                <textarea name="code" placeholder="Paste your code here..." required 
+                    style="padding: 12px; background: #1c2128; border: 1px solid var(--border); color: white; border-radius: 8px; min-height: 120px; font-family: monospace;"></textarea>
+                
+                <button type="submit" 
+                    style="background: var(--accent); color: black; border: none; padding: 12px; border-radius: 8px; font-weight: bold; cursor: pointer;">
+                    Upload to Library
+                </button>
+            </form>
+        </div>
+
+        <footer>
+            &copy; 2026 CodeAvail &bull; Engineered by Maheen Touseef
+        </footer>
+
     </div>
-    <pre><code class="language-css">.dot { animation: pulse 0.6s infinite alternate; }
-@keyframes pulse {
-  from { opacity: 1; }
-  to { opacity: 0.3; }
-}</code></pre>
-</div>
-
-<div class="card" data-cat="JavaScript">
-    <button class="copy-btn">Copy</button>
-    <h3>Search Debounce</h3>
-    <pre><code class="language-javascript">const debounce = (func, delay) => {
-  let timer;
-  return (...args) => {
-    clearTimeout(timer);
-    timer = setTimeout(() => func(...args), delay);
-  };
-};</code></pre>
-</div>
-
-<div class="card" data-cat="Python">
-    <button class="copy-btn">Copy</button>
-    <h3>FastAPI Minimal Server</h3>
-    <pre><code class="language-python">from fastapi import FastAPI
-app = FastAPI()
-
-@app.get("/")
-def home():
-    return {"status": "online"}</code></pre>
-</div>
-
-<div class="card web-card" data-cat="Web">
-    <button class="copy-btn">Copy</button>
-    <h3>Glassmorphism UI</h3>
-    <div class="demo-box">
-        <div style="background: rgba(255,255,255,0.1); backdrop-filter: blur(10px); padding: 20px; border-radius: 10px; border: 1px solid rgba(255,255,255,0.2); color: white;">Glass</div>
-    </div>
-    <pre><code class="language-css">.glass {
-  background: rgba(255, 255, 255, 0.1);
-  backdrop-filter: blur(10px);
-  border: 1px solid rgba(255,255,255,0.2);
-}</code></pre>
-</div>
-
-<div class="card" data-cat="JavaScript">
-    <button class="copy-btn">Copy</button>
-    <h3>Theme Persistence</h3>
-    <pre><code class="language-javascript">const saveTheme = (theme) => {
-  localStorage.setItem('user-theme', theme);
-};
-const getTheme = () => localStorage.getItem('user-theme');</code></pre>
-</div>
-
-<div class="card" data-cat="Python">
-    <button class="copy-btn">Copy</button>
-    <h3>Simple URL Shortener</h3>
-    <pre><code class="language-python">import pyshorteners
-s = pyshorteners.Shortener()
-print(s.tinyurl.short('https://google.com'))</code></pre>
-</div>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-python.min.js"></script>

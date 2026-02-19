@@ -1,63 +1,88 @@
-let activeCategory = "all";
+const snippetList = document.getElementById('snippetList');
+const searchBar = document.getElementById('searchBar');
+const tabBtns = document.querySelectorAll('.tab-btn');
+const themeToggle = document.getElementById('themeToggle');
+let allSnippets = [];
 
-const tabs = document.querySelectorAll(".tab-btn");
-const cards = document.querySelectorAll(".card");
-const searchBar = document.getElementById("searchBar");
+// --- 1. Load Data & Control Loader ---
+fetch('snippets.json')
+    .then(res => res.json())
+    .then(data => {
+        allSnippets = data;
+        renderSnippets(allSnippets);
+        
+        // BOSS: Hiding the loader with a smooth fade
+        setTimeout(() => {
+            const loader = document.getElementById('loader-wrapper');
+            if(loader) {
+                loader.style.opacity = '0';
+                // Remove from layout after fade out
+                setTimeout(() => loader.style.display = 'none', 500);
+            }
+        }, 1500); 
+    })
+    .catch(err => {
+        console.error("Boss, we have a problem:", err);
+        const loader = document.getElementById('loader-wrapper');
+        // Corrected: Add .style here so the site isn't stuck on the loader if it fails
+        if(loader) loader.style.display = 'none'; 
+    });
 
-// Category Filtering logic
-tabs.forEach(btn => {
-    btn.addEventListener("click", () => {
-        tabs.forEach(b => b.classList.remove("active"));
-        btn.classList.add("active");
-        activeCategory = btn.dataset.cat;
-        applyFilters();
+// --- 2. Render Snippets to UI ---
+function renderSnippets(snippets) {
+    snippetList.innerHTML = snippets.map(s => `
+        <div class="card ${s.isWeb ? 'web-card' : ''}" data-cat="${s.category}">
+            <span class="lang-tag">${s.category}</span>
+            <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+            <h3>${s.title}</h3>
+            ${s.isWeb ? `<div class="demo-box">${s.demo}</div>` : ''}
+            <pre><code class="language-${s.language}">${s.code}</code></pre>
+        </div>
+    `).join('');
+    
+    // Refresh syntax highlighting
+    Prism.highlightAll();
+}
+
+// --- 3. Search & Filter Logic ---
+function filterSnippets() {
+    const term = searchBar.value.toLowerCase();
+    const activeCat = document.querySelector('.tab-btn.active').dataset.cat;
+
+    const filtered = allSnippets.filter(s => {
+        const matchesSearch = s.title.toLowerCase().includes(term);
+        const matchesTab = activeCat === 'all' || s.category === activeCat;
+        return matchesSearch && matchesTab;
+    });
+    renderSnippets(filtered);
+}
+
+searchBar.addEventListener('input', filterSnippets);
+
+tabBtns.forEach(btn => {
+    btn.addEventListener('click', () => {
+        tabBtns.forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        filterSnippets();
     });
 });
 
-// Search logic
-if (searchBar) {
-    searchBar.addEventListener("input", applyFilters);
-}
+// --- 4. Copy Function ---
+window.copyCode = (btn) => {
+    const code = btn.parentElement.querySelector('code').innerText;
+    navigator.clipboard.writeText(code);
+    const originalText = btn.innerText;
+    btn.innerText = "COPIED!";
+    btn.style.background = "#00ff88";
+    setTimeout(() => {
+        btn.innerText = originalText;
+        btn.style.background = "var(--accent)";
+    }, 2000);
+};
 
-function applyFilters() {
-    const query = searchBar.value.toLowerCase();
-
-    cards.forEach(card => {
-        const matchCat = (activeCategory === "all" || card.dataset.cat === activeCategory);
-        const matchSearch = card.dataset.search?.includes(query) || card.innerText.toLowerCase().includes(query);
-        card.style.display = (matchCat && matchSearch) ? "block" : "none";
-    });
-}
-
-// Clipboard Copy logic
-document.querySelectorAll(".copy-btn").forEach(btn => {
-    btn.addEventListener("click", () => {
-        const code = btn.parentElement.querySelector("code").innerText;
-
-        navigator.clipboard.writeText(code)
-            .then(() => {
-                btn.innerText = "Copied!";
-                setTimeout(() => btn.innerText = "Copy", 2000);
-            })
-            .catch(() => {
-                alert("Clipboard failed.");
-            });
-    });
+// --- 5. Theme Toggle ---
+themeToggle.addEventListener('click', () => {
+    document.body.classList.toggle('light-theme');
+    const isLight = document.body.classList.contains('light-theme');
+    themeToggle.innerText = isLight ? "[ DARK_MODE ]" : "[ LIGHT_MODE ]";
 });
-
-// Theme Toggle logic
-const toggleBtn = document.getElementById("themeToggle");
-let isLight = false;
-
-if (toggleBtn) {
-    toggleBtn.addEventListener("click", () => {
-        isLight = !isLight;
-
-        document.documentElement.style.setProperty("--bg", isLight ? "#ffffff" : "#0b0e14");
-        document.documentElement.style.setProperty("--card", isLight ? "#f6f8fa" : "#151921");
-        document.documentElement.style.setProperty("--border", isLight ? "#d0d7de" : "#2d333b");
-        document.body.style.color = isLight ? "#24292f" : "#adbac7";
-
-        toggleBtn.innerText = isLight ? "[ DARK_MODE ]" : "[ LIGHT_MODE ]";
-    });
-}
