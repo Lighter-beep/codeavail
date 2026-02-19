@@ -3,6 +3,7 @@ const searchBar = document.getElementById('searchBar');
 const tabBtns = document.querySelectorAll('.tab-btn');
 const themeToggle = document.getElementById('themeToggle');
 let allSnippets = [];
+
 // --- 1. Load Data & Control Cinematic Loader ---
 fetch('snippets.json')
     .then(res => res.json())
@@ -10,14 +11,11 @@ fetch('snippets.json')
         allSnippets = data;
         renderSnippets(allSnippets);
         
-        // BOSS: Wait for the typewriter and line animation to finish (approx 2.5s)
+        // Wait for the typewriter and line animation to finish (approx 2.5s)
         setTimeout(() => {
             const loader = document.getElementById('loader-wrapper');
             if(loader) {
-                // This adds the CSS class that slides the screen UP
                 loader.classList.add('hide-up');
-                
-                // Remove it from the DOM entirely after the slide animation (0.8s)
                 setTimeout(() => {
                     loader.style.display = 'none';
                 }, 800);
@@ -33,23 +31,24 @@ fetch('snippets.json')
 // --- 2. Render Snippets to UI ---
 function renderSnippets(snippets) {
     snippetList.innerHTML = snippets.map(s => `
-        <div class="card ${s.isWeb ? 'web-card' : ''}" data-cat="${s.category}">
+        <div class="card ${s.category === 'Web' ? 'web-card' : ''}" data-cat="${s.category}">
             <span class="lang-tag">${s.category}</span>
             <button class="copy-btn" onclick="copyCode(this)">Copy</button>
             <h3>${s.title}</h3>
-            ${s.isWeb ? `<div class="demo-box">${s.demo}</div>` : ''}
+            ${s.category === 'Web' ? `<div class="demo-box">${s.demo}</div>` : ''}
             <pre><code class="language-${s.language}">${s.code}</code></pre>
         </div>
     `).join('');
     
     // Refresh syntax highlighting
-    Prism.highlightAll();
+    if (window.Prism) Prism.highlightAll();
 }
 
 // --- 3. Search & Filter Logic ---
 function filterSnippets() {
     const term = searchBar.value.toLowerCase();
-    const activeCat = document.querySelector('.tab-btn.active').dataset.cat;
+    const activeBtn = document.querySelector('.tab-btn.active');
+    const activeCat = activeBtn ? activeBtn.dataset.cat : 'all';
 
     const filtered = allSnippets.filter(s => {
         const matchesSearch = s.title.toLowerCase().includes(term);
@@ -76,15 +75,27 @@ window.copyCode = (btn) => {
     const originalText = btn.innerText;
     btn.innerText = "COPIED!";
     btn.style.background = "#00ff88";
+    btn.style.color = "#000";
     setTimeout(() => {
         btn.innerText = originalText;
         btn.style.background = "var(--accent)";
+        btn.style.color = "black";
     }, 2000);
 };
 
-// --- 5. Theme Toggle ---
+// --- 5. Theme Toggle & Memory ---
+// Check for saved user preference
+const savedTheme = localStorage.getItem('theme');
+if (savedTheme === 'light') {
+    document.body.classList.add('light-theme');
+    themeToggle.innerText = "DARK MODE";
+}
+
 themeToggle.addEventListener('click', () => {
     document.body.classList.toggle('light-theme');
     const isLight = document.body.classList.contains('light-theme');
-    themeToggle.innerText = isLight ? "[ DARK_MODE ]" : "[ LIGHT_MODE ]";
+    
+    // Update text and save to localStorage
+    themeToggle.innerText = isLight ? "DARK MODE" : "LIGHT MODE";
+    localStorage.setItem('theme', isLight ? 'light' : 'dark');
 });
