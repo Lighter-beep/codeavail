@@ -3,28 +3,30 @@ const searchBar = document.getElementById('searchBar');
 const tabBtns = document.querySelectorAll('.tab-btn');
 const themeToggle = document.getElementById('themeToggle');
 let allSnippets = [];
-
-// --- 1. Load Data & Control Loader ---
+// --- 1. Load Data & Control Cinematic Loader ---
 fetch('snippets.json')
     .then(res => res.json())
     .then(data => {
         allSnippets = data;
         renderSnippets(allSnippets);
         
-        // BOSS: Hiding the loader with a smooth fade
+        // BOSS: Wait for the typewriter and line animation to finish (approx 2.5s)
         setTimeout(() => {
             const loader = document.getElementById('loader-wrapper');
             if(loader) {
-                loader.style.opacity = '0';
-                // Remove from layout after fade out
-                setTimeout(() => loader.style.display = 'none', 500);
+                // This adds the CSS class that slides the screen UP
+                loader.classList.add('hide-up');
+                
+                // Remove it from the DOM entirely after the slide animation (0.8s)
+                setTimeout(() => {
+                    loader.style.display = 'none';
+                }, 800);
             }
-        }, 1500); 
+        }, 2500); 
     })
     .catch(err => {
-        console.error("Boss, we have a problem:", err);
+        console.error("Boss, the system failed to boot:", err);
         const loader = document.getElementById('loader-wrapper');
-        // Corrected: Add .style here so the site isn't stuck on the loader if it fails
         if(loader) loader.style.display = 'none'; 
     });
 
