@@ -53,6 +53,7 @@
     "language": "python",
     "code": "from fastapi import FastAPI\napp = FastAPI()\n@app.get(\"/\")\ndef home(): return {\"status\": \"online\"}"
   },
+  
   {
     "id": 8,
     "title": "Glassmorphism UI",

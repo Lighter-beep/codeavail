@@ -67,7 +67,7 @@ tabBtns.forEach(btn => {
     });
 });
 
-// --- 4. Copy Function ---
+// --- 4. Copy Function --
 window.copyCode = (btn) => {
     const code = btn.parentElement.querySelector('code').innerText;
     navigator.clipboard.writeText(code);
