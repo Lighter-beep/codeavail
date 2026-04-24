@@ -4,7 +4,7 @@ const tabBtns = document.querySelectorAll('.tab-btn');
 const themeToggle = document.getElementById('themeToggle');
 let allSnippets = [];
 
-// --- 1. Load Data & Control Loader ---
+// --- 1. Load Data & Control Loade---
 fetch('snippets.json')
     .then(res => res.json())
     .then(data => {
